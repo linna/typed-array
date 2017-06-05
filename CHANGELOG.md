@@ -10,3 +10,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 * `Linna\intArray` for create integer typed arrays.
+* `Linna\stringArray` for create string typed arrays.
+* `Linna\floatArray` for create float typed arrays.

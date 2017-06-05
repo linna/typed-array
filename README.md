@@ -20,14 +20,16 @@ composer require s3b4stian/linna-array
 ```
 
 ## Usage
+Valid for intArray, stringArray and floatArray classes
 ```php
 use Linna\intArray;
 
+//int array
 //correct, only int passed to array.
-$array = new intArray([1,2,3,4]);
-$array[] = 5;
+$intArray = new intArray([1, 2, 3, 4]);
+$intArray[] = 5;
 
 //throw TypeError.
-$array = new intArray([1,'a',3,4]);
-$array[] = 'a';
+$intArray = new intArray([1, 'a', 3, 4]);
+$intArray[] = 'a';
 ```

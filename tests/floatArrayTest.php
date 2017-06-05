@@ -9,14 +9,14 @@
  */
 declare(strict_types=1);
 
-use Linna\intArray;
+use Linna\floatArray;
 use PHPUnit\Framework\TestCase;
 
-class intArrayTest extends TestCase
+class floatArrayTest extends TestCase
 {
     public function testCreateInstance()
     {
-        $this->assertInstanceOf(intArray::class, (new intArray([1, 2, 3, 4, 5])));
+        $this->assertInstanceOf(floatArray::class, (new floatArray([1.1, 2.2, 3.3, 4.4, 5.5])));
     }
 
     public function BadArgumentsProvider()
@@ -25,7 +25,7 @@ class intArrayTest extends TestCase
             [[null, null, null]],
             [[true, false, true]],
             [['a', 'b', 'c']],
-            [[1.1, 2.1, 3.1]],
+            [[1, 2, 3]],
             [[[1], [2], [3]]],
             [[(object) [1], (object) [2], (object) [3]]],
             [[function () {
@@ -40,13 +40,13 @@ class intArrayTest extends TestCase
      */
     public function testCreateInstanceWithBadArray($array)
     {
-        (new intArray($array));
+        (new floatArray($array));
     }
 
     public function testArrayStyleAssign()
     {
-        $intArray = new intArray([1, 2, 3, 4]);
-        $intArray[] = 5;
+        $intArray = new floatArray([1.1, 2.2, 3.3, 4.4]);
+        $intArray[] = 5.5;
 
         $this->assertEquals(5, $intArray->count());
     }
@@ -57,7 +57,7 @@ class intArrayTest extends TestCase
             [null],
             [true],
             ['e'],
-            [1.1],
+            [1],
             [[1]],
             [(object) [1]],
             [function () {
@@ -71,7 +71,7 @@ class intArrayTest extends TestCase
      */
     public function testArrayStyleAssignBadValue($value)
     {
-        $intArray = new intArray([1, 2, 3, 4]);
+        $intArray = new floatArray([1.1, 2.2, 3.3, 4.4]);
         $intArray[] = $value;
     }
 }

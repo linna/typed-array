@@ -9,3 +9,4 @@
  */
 include dirname(__DIR__).'/src/intArray.php';
 include dirname(__DIR__).'/src/stringArray.php';
+include dirname(__DIR__).'/src/floatArray.php';
