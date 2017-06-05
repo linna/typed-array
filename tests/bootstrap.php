@@ -8,3 +8,4 @@
  * @license http://opensource.org/licenses/MIT MIT License
  */
 include dirname(__DIR__).'/src/intArray.php';
+include dirname(__DIR__).'/src/stringArray.php';
