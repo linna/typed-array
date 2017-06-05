@@ -36,7 +36,7 @@ $intArray[] = 'a';
 
 ### Performance consideration
 Compared to the parent class [ArrayObject](http://php.net/manual/en/class.arrayobject.php) typed arrays are slower on writing
-approximately from 15x to 20x. The slowness due to not native `__construct()` and not native `offsetSet()`.  
+approximately from 15x to 20x. The slowness is due to not native `__construct()` and not native `offsetSet()`.  
 Other operations do not have a speed difference with the native ArrayObject.
 ```php
 use Linna\intArray;
