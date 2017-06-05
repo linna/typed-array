@@ -1,0 +1,30 @@
+# .scrutinizer.yml
+checks:
+    php:
+        code_rating: true
+        duplication: true
+
+filter:
+    paths: ['src/*']
+    
+tools:
+    php_code_sniffer:
+        config:
+            standard: "PSR2"
+
+build:
+    environment:
+       php: 7.1
+    tests:
+            override:
+                -
+                    command: '/usr/local/bin/phpunit --coverage-clover=clover.xml'
+                    coverage:
+                        file: 'clover.xml'
+                        format: 'clover'
+
+    project_setup:
+            before:
+                - wget https://phar.phpunit.de/phpunit.phar
+                - chmod +x phpunit.phar
+                - sudo mv phpunit.phar /usr/local/bin/phpunit
