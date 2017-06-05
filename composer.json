@@ -1,0 +1,22 @@
+{
+    "name": "s3b4stian/linna-array",
+    "type": "library",
+    "description": "Linna Array",
+    "keywords": ["Array", "Typed Array", "php"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sebastian Rapetti",
+            "email": "sebastian.rapetti@alice.it",
+            "homepage": "https://github.com/s3b4stian/linna-array"
+        }
+    ],
+    "require": {
+        "php": "^7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Linna\\": "src/Linna/"
+        }
+    }
+}
