@@ -16,19 +16,21 @@ class intArrayTest extends TestCase
 {
     public function testCreateInstance()
     {
-        $this->assertInstanceOf(intArray::class, (new intArray([1,2,3,4,5])));
+        $this->assertInstanceOf(intArray::class, (new intArray([1, 2, 3, 4, 5])));
     }
-    
+
     public function BadArgumentsProvider()
     {
         return [
-            [[null,null,null]],
-            [[true,false,true]],
-            [['a','b','c']],
+            [[null, null, null]],
+            [[true, false, true]],
+            [['a', 'b', 'c']],
             [[1.1, 2.1, 3.1]],
-            [[[1],[2],[3]]],
-            [[(object)[1],(object)[2],(object)[3]]],
-            [[function () {}, function () {}]],
+            [[[1], [2], [3]]],
+            [[(object) [1], (object) [2], (object) [3]]],
+            [[function () {
+            }, function () {
+            }]],
         ];
     }
 
@@ -40,15 +42,15 @@ class intArrayTest extends TestCase
     {
         (new intArray($array));
     }
-    
+
     public function testArrayStyleAssign()
     {
-        $intArray = new intArray([1,2,3,4]);
+        $intArray = new intArray([1, 2, 3, 4]);
         $intArray[] = 6;
-        
+
         $this->assertEquals(5, $intArray->count());
     }
-    
+
     public function BadValueProvider()
     {
         return [
@@ -57,8 +59,9 @@ class intArrayTest extends TestCase
             ['e'],
             [1.1],
             [[1]],
-            [(object)[1]],
-            [function () {}],
+            [(object) [1]],
+            [function () {
+            }],
         ];
     }
 
@@ -68,7 +71,7 @@ class intArrayTest extends TestCase
      */
     public function testArrayStyleAssignBadValue($value)
     {
-        $intArray = new intArray([1,2,3,4]);
+        $intArray = new intArray([1, 2, 3, 4]);
         $intArray[] = $value;
     }
 }
