@@ -40,9 +40,10 @@ class TypedArray extends ArrayObject
 
     /**
      * Contructor.
-     * 
+     *
      * @param string $type
      * @param array  $array
+     *
      * @throws InvalidArgumentException If type is not supported
      * @throws TypeError                If elements of passed with $array
      *                                  are not of the configured type
