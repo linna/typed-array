@@ -64,6 +64,7 @@ class TypedObjectArray extends ArrayObject
     {
         if ($newval instanceof $this->type) {
             parent::offsetSet($index, $newval);
+
             return;
         }
         throw new InvalidArgumentException('Elements passed to '.__CLASS__.' must be of the type '.$this->type);
