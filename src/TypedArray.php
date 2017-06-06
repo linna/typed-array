@@ -21,7 +21,7 @@ use TypeError;
 class TypedArray extends ArrayObject
 {
     /**
-     * @var array $allowedTypes Types supported by class
+     * @var array Types supported by class
      */
     protected $allowedTypes = [
         'array',
@@ -34,7 +34,7 @@ class TypedArray extends ArrayObject
     ];
 
     /**
-     * @var string $type Current type for array
+     * @var string Current type for array
      */
     protected $type = '';
 
@@ -42,7 +42,7 @@ class TypedArray extends ArrayObject
      * Contructor.
      * 
      * @param string $type
-     * @param array $array
+     * @param array  $array
      * @throws InvalidArgumentException If type is not supported
      * @throws TypeError                If elements of passed with $array
      *                                  are not of the configured type
@@ -51,7 +51,7 @@ class TypedArray extends ArrayObject
     {
         //single class, multi type support :)
         //if (!isset($this->allowedTypes[$type])){
-        if (!in_array($type, $this->allowedTypes)){
+        if (!in_array($type, $this->allowedTypes)) {
             throw new InvalidArgumentException($type.' type passed to '.__CLASS__.' not supported');
         }
 
@@ -84,6 +84,7 @@ class TypedArray extends ArrayObject
 
         if ($is_($newval)) {
             parent::offsetSet($index, $newval);
+
             return;
         }
         throw new TypeError('Elements passed to '.__CLASS__.' must be of the type '.$this->type);
