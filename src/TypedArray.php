@@ -13,7 +13,6 @@ namespace Linna;
 
 use ArrayObject;
 use InvalidArgumentException;
-use TypeError;
 
 /**
  * Create an array of typed elements.
@@ -44,14 +43,13 @@ class TypedArray extends ArrayObject
      * @param string $type
      * @param array  $array
      *
-     * @throws InvalidArgumentException If type is not supported
-     * @throws TypeError                If elements of passed with $array
+     * @throws InvalidArgumentException If type is not supported and if
+     *                                  elements of passed with $array
      *                                  are not of the configured type
      */
     public function __construct(string $type, array $array = [])
     {
         //single class, multi type support :)
-        //if (!isset($this->allowedTypes[$type])){
         if (!in_array($type, $this->allowedTypes)) {
             throw new InvalidArgumentException($type.' type passed to '.__CLASS__.' not supported');
         }
@@ -59,7 +57,7 @@ class TypedArray extends ArrayObject
         //for not utilize foreach, compare sizes of array
         //before and after apply a filter :)
         if (count($array) > count(array_filter($array, 'is_'.$type))) {
-            throw new TypeError('Elements passed to '.__CLASS__.' must be of the type '.$type);
+            throw new InvalidArgumentException('Elements passed to '.__CLASS__.' must be of the type '.$type);
         }
 
         //call parent constructor
@@ -75,7 +73,7 @@ class TypedArray extends ArrayObject
      * @param mixed $index
      * @param mixed $newval
      *
-     * @throws TypeError If value passed with $newval are not of the configured type
+     * @throws InvalidArgumentException If value passed with $newval are not of the configured type
      *
      * @return void
      */
@@ -88,6 +86,6 @@ class TypedArray extends ArrayObject
 
             return;
         }
-        throw new TypeError('Elements passed to '.__CLASS__.' must be of the type '.$this->type);
+        throw new InvalidArgumentException('Elements passed to '.__CLASS__.' must be of the type '.$this->type);
     }
 }
