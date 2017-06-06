@@ -7,7 +7,7 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/s3b4stian/linna-array/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/s3b4stian/linna-array/?branch=master)
 [![StyleCI](https://styleci.io/repos/93407083/shield?branch=master&style=flat)](https://styleci.io/repos/93407083)
 
-## Typed arrays for php
+# Typed arrays for php
 Provide typed arrays for php as extension of native [ArrayObject](http://php.net/manual/en/class.arrayobject.php)
 
 ## Requirements
@@ -19,36 +19,46 @@ With composer:
 composer require s3b4stian/linna-array
 ```
 
-## Usage
-Valid for intArray, stringArray and floatArray classes
+## Usage TypedArray
 ```php
-use Linna\intArray;
+use Linna\TypedArray;
 
-//int array
 //correct, only int passed to array.
-$intArray = new intArray([1, 2, 3, 4]);
-$intArray[] = 5;
+$array = new TypedArray('int', [1, 2, 3, 4]);
+$array[] = 5;
 
-//throw TypeError.
-$intArray = new intArray([1, 'a', 3, 4]);
-$intArray[] = 'a';
+//throw InvalidArgumentException.
+$array = new TypedArray([1, 'a', 3, 4]);
+$array[] = 'a';
+```
+Allowed types are: array, bool, callable, float, int, object, string.
+```php
+use Linna\TypedArray;
+
+$intArray = new TypedArray('int');
+$arrayArray = new TypedArray('array');
+$boolArray = new TypedArray('bool');
+$callableArray = new TypedArray('callable');
+$floatArray = new TypedArray('float');
+$intArray = new TypedArray('int');
+$objectArray = new TypedArray('object');
+$stringArray = new TypedArray('string');
 ```
 
-### Performance consideration
+## Performance consideration
 Compared to the parent class [ArrayObject](http://php.net/manual/en/class.arrayobject.php) typed arrays are slower on writing
 approximately from 15x to 20x. The slowness is due to not native `__construct()` and not native `offsetSet()`.  
 Other operations do not have a speed difference with the native ArrayObject.
 ```php
-use Linna\intArray;
+use Linna\TypedArray;
 
 //slower from 15x to 20x.
-$intArray = new intArray([1, 2, 3, 4]);
-$intArray[] = 5;
+$array = new TypedArray('int', [1, 2, 3, 4]);
+$array[] = 5;
 
 //other operations, fast as native.
 //for example:
-$arrayElement = $intArray[0];
-$elements = $intArray->count();
-$array = (array) $intArray;
+$arrayElement = $array[0];
+$elements = $array->count();
 ```
 
