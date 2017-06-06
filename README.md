@@ -8,7 +8,11 @@
 [![StyleCI](https://styleci.io/repos/93407083/shield?branch=master&style=flat)](https://styleci.io/repos/93407083)
 
 # Typed arrays for php
-Provide typed arrays for php as extension of native [ArrayObject](http://php.net/manual/en/class.arrayobject.php)
+Provide typed arrays for php as extension of native [ArrayObject](http://php.net/manual/en/class.arrayobject.php).  
+
+Package contain two classes:  
+**TypedArray** for arrays that accept only values of the user defined type.  
+**TypedObjectArray** for arrays that accept only class instances of the user defined type.
 
 ## Requirements
 This package require php 7.
@@ -28,23 +32,31 @@ $array = new TypedArray('int', [1, 2, 3, 4]);
 $array[] = 5;
 
 //throw InvalidArgumentException.
-$array = new TypedArray([1, 'a', 3, 4]);
+$array = new TypedArray('int', [1, 'a', 3, 4]);
+//throw InvalidArgumentException.
 $array[] = 'a';
 ```
-Allowed types are: array, bool, callable, float, int, object, string.
+Allowed types are: *array*, *bool*, *callable*, *float*, *int*, *object*, *string*.
+
+## Usage TypedObjectArray
 ```php
-use Linna\TypedArray;
+use Linna\TypedObjectArray;
 
-$intArray = new TypedArray('int');
-$arrayArray = new TypedArray('array');
-$boolArray = new TypedArray('bool');
-$callableArray = new TypedArray('callable');
-$floatArray = new TypedArray('float');
-$intArray = new TypedArray('int');
-$objectArray = new TypedArray('object');
-$stringArray = new TypedArray('string');
+//correct, only Foo class instances passed to array.
+$array = new TypedObjectArray(Foo::class, [
+    new Foo(),
+    new Foo()
+]);
+$array[] = new Foo();
+
+//throw InvalidArgumentException.
+$array = new TypedObjectArray(Foo::class, [
+    new Foo(),
+    new Bar()
+]);
+//throw InvalidArgumentException.
+$array[] = new Bar();
 ```
-
 ## Performance consideration
 Compared to the parent class [ArrayObject](http://php.net/manual/en/class.arrayobject.php) typed arrays are slower on writing
 approximately from 15x to 20x. The slowness is due to not native `__construct()` and not native `offsetSet()`.  
