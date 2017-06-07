@@ -13,7 +13,7 @@ use Linna\TypedObjectArray;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Typed Object Array Test
+ * Typed Object Array Test.
  */
 class TypedObjectArrayTest extends TestCase
 {
@@ -24,7 +24,7 @@ class TypedObjectArrayTest extends TestCase
     {
         $this->assertInstanceOf(TypedObjectArray::class, (new TypedObjectArray(ArrayObject::class)));
     }
-    
+
     /**
      * Test new instance with not existent class.
      *
@@ -34,24 +34,24 @@ class TypedObjectArrayTest extends TestCase
     {
         $this->assertInstanceOf(TypedObjectArray::class, (new TypedObjectArray(ArrayBadObject::class)));
     }
-    
+
     /**
      * Test new instance passing right typed array to constructor.
      */
     public function testCreateInstanceWithRightTypedArray()
     {
         $this->assertInstanceOf(
-            TypedObjectArray::class, 
+            TypedObjectArray::class,
             (new TypedObjectArray(
                 ArrayObject::class, [
-                    new ArrayObject([1,2,3]),
-                    new ArrayObject([1.1,2.2,3.3]),
-                    new ArrayObject(['a','b','c'])
+                    new ArrayObject([1, 2, 3]),
+                    new ArrayObject([1.1, 2.2, 3.3]),
+                    new ArrayObject(['a', 'b', 'c']),
                 ])
             )
         );
     }
-    
+
     /**
      * Test new instance passing array with invalid element to constructor.
      *
@@ -60,28 +60,28 @@ class TypedObjectArrayTest extends TestCase
     public function testCreateInstanceWithWrongTypedArray()
     {
         $this->assertInstanceOf(
-            TypedObjectArray::class, 
+            TypedObjectArray::class,
             (new TypedObjectArray(
                 ArrayObject::class, [
-                    new ArrayObject([1,2,3]),
-                    new ArrayObject([1.1,2.2,3.3]),
-                    new SplStack()
+                    new ArrayObject([1, 2, 3]),
+                    new ArrayObject([1.1, 2.2, 3.3]),
+                    new SplStack(),
                 ])
             )
         );
     }
-    
+
     /**
      * Test assign to array a right typed value.
      */
     public function testAssignrRightTypedValueToArray()
     {
         $array = new TypedObjectArray(ArrayObject::class);
-        $array[] = new ArrayObject([1,2,3]);
+        $array[] = new ArrayObject([1, 2, 3]);
 
         $this->assertEquals(1, $array->count());
     }
-    
+
     /**
      * Test assign to array a wrong typed value.
      *

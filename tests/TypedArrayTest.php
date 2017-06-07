@@ -13,16 +13,16 @@ use Linna\TypedArray;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Typed Array Test
+ * Typed Array Test.
  */
 class TypedArrayTest extends TestCase
 {
     /**
      * Provide allowed types.
-     * 
+     *
      * @return array
      */
-    function allowedTypeProvider()
+    public function allowedTypeProvider()
     {
         return [
             ['array'],
@@ -34,7 +34,7 @@ class TypedArrayTest extends TestCase
             ['string'],
         ];
     }
-    
+
     /**
      * Test new instance.
      *
@@ -44,7 +44,7 @@ class TypedArrayTest extends TestCase
     {
         $this->assertInstanceOf(TypedArray::class, (new TypedArray($type)));
     }
-    
+
     /**
      * Test new instance with not allowed type.
      *
@@ -54,26 +54,27 @@ class TypedArrayTest extends TestCase
     {
         $this->assertInstanceOf(TypedArray::class, (new TypedArray('notAllowedType')));
     }
-    
-    
+
     /**
      * Provide arrays of right typed values.
-     * 
+     *
      * @return array
      */
-    function rightTypedArrayProvider()
+    public function rightTypedArrayProvider()
     {
         return [
-            ['array', [[1],[2]]],
+            ['array', [[1], [2]]],
             ['bool', [true, false]],
-            ['callable', [function(){}, function(){}]],
+            ['callable', [function () {
+            }, function () {
+            }]],
             ['float', [1.1, 2.2]],
             ['int', [1, 2]],
-            ['object', [(object)['name' => 'foo'], (object)['name' => 'bar']]],
+            ['object', [(object) ['name' => 'foo'], (object) ['name' => 'bar']]],
             ['string', ['a', 'b']],
         ];
     }
-    
+
     /**
      * Test new instance passing right typed array to constructor.
      *
@@ -83,67 +84,77 @@ class TypedArrayTest extends TestCase
     {
         $this->assertInstanceOf(TypedArray::class, (new TypedArray($type, $array)));
     }
-    
+
     /**
      * Provide arrays of wrong typed values.
-     * 
+     *
      * @return array
      */
-    function wrongTypedArrayProvider()
+    public function wrongTypedArrayProvider()
     {
         return [
             ['array', [true, false]],
-            ['array', [function(){}, function(){}]],
+            ['array', [function () {
+            }, function () {
+            }]],
             ['array', [1.1, 2.2]],
             ['array', [1, 2]],
-            ['array', [(object)['name' => 'foo'], (object)['name' => 'bar']]],
+            ['array', [(object) ['name' => 'foo'], (object) ['name' => 'bar']]],
             ['array', ['a', 'b']],
-            
-            ['bool', [[1],[2]]],
-            ['bool', [function(){}, function(){}]],
+
+            ['bool', [[1], [2]]],
+            ['bool', [function () {
+            }, function () {
+            }]],
             ['bool', [1.1, 2.2]],
             ['bool', [1, 2]],
-            ['bool', [(object)['name' => 'foo'], (object)['name' => 'bar']]],
+            ['bool', [(object) ['name' => 'foo'], (object) ['name' => 'bar']]],
             ['bool', ['a', 'b']],
-            
-            ['callable', [[1],[2]]],
+
+            ['callable', [[1], [2]]],
             ['callable', [true, false]],
             ['callable', [1.1, 2.2]],
             ['callable', [1, 2]],
-            ['callable', [(object)['name' => 'foo'], (object)['name' => 'bar']]],
-            ['callable', ['a', 'b']],        
-            
-            ['float', [[1],[2]]],
+            ['callable', [(object) ['name' => 'foo'], (object) ['name' => 'bar']]],
+            ['callable', ['a', 'b']],
+
+            ['float', [[1], [2]]],
             ['float', [true, false]],
-            ['float', [function(){}, function(){}]],
+            ['float', [function () {
+            }, function () {
+            }]],
             ['float', [1, 2]],
-            ['float', [(object)['name' => 'foo'], (object)['name' => 'bar']]],
+            ['float', [(object) ['name' => 'foo'], (object) ['name' => 'bar']]],
             ['float', ['a', 'b']],
-            
-            ['int', [[1],[2]]],
+
+            ['int', [[1], [2]]],
             ['int', [true, false]],
-            ['int', [function(){}, function(){}]],
+            ['int', [function () {
+            }, function () {
+            }]],
             ['int', [1.1, 2.2]],
-            ['int', [(object)['name' => 'foo'], (object)['name' => 'bar']]],
+            ['int', [(object) ['name' => 'foo'], (object) ['name' => 'bar']]],
             ['int', ['a', 'b']],
-                    
-            ['object', [[1],[2]]],
+
+            ['object', [[1], [2]]],
             ['object', [true, false]],
             //skip this because closure pass as object
             //['object', [function(){}, function(){}]],
             ['object', [1.1, 2.2]],
             ['object', [1, 2]],
             ['object', ['a', 'b']],
-                    
-            ['string', [[1],[2]]],
+
+            ['string', [[1], [2]]],
             ['string', [true, false]],
-            ['string', [function(){}, function(){}]],
+            ['string', [function () {
+            }, function () {
+            }]],
             ['string', [1.1, 2.2]],
             ['string', [1, 2]],
-            ['string', [(object)['name' => 'foo'], (object)['name' => 'bar']]],
+            ['string', [(object) ['name' => 'foo'], (object) ['name' => 'bar']]],
         ];
     }
-    
+
     /**
      * Test new instance passing array with invalid element to constructor.
      *
@@ -154,25 +165,26 @@ class TypedArrayTest extends TestCase
     {
         $this->assertInstanceOf(TypedArray::class, (new TypedArray($type, $array)));
     }
-    
+
     /**
      * Provide values of right types.
-     * 
+     *
      * @return array
      */
-    function rightTypedValueProvider()
+    public function rightTypedValueProvider()
     {
         return [
-            ['array',[1]],
+            ['array', [1]],
             ['bool', true],
-            ['callable', function(){}],
+            ['callable', function () {
+            }],
             ['float', 1.1],
             ['int', 1],
-            ['object',(object)['name' => 'foo']],
+            ['object', (object) ['name' => 'foo']],
             ['string', 'a'],
         ];
     }
-    
+
     /**
      * Test assign to array a right typed value.
      *
@@ -185,50 +197,54 @@ class TypedArrayTest extends TestCase
 
         $this->assertEquals(1, $array->count());
     }
-    
+
     /**
      * Provide values of wrong types.
-     * 
+     *
      * @return array
      */
-    function wrongTypedValueProvider()
+    public function wrongTypedValueProvider()
     {
         return [
             ['array', true],
-            ['array', function(){}],
+            ['array', function () {
+            }],
             ['array', 1.1],
             ['array', 1],
-            ['array', (object)['name' => 'foo']],
+            ['array', (object) ['name' => 'foo']],
             ['array', 'a'],
-            
+
             ['bool', [1]],
-            ['bool', function(){}],
+            ['bool', function () {
+            }],
             ['bool', 1.1],
             ['bool', 1],
-            ['bool', (object)['name' => 'foo']],
+            ['bool', (object) ['name' => 'foo']],
             ['bool', 'a'],
-            
+
             ['callable', [1]],
             ['callable', true],
             ['callable', 1.1],
             ['callable', 1],
-            ['callable', (object)['name' => 'foo']],
-            ['callable', 'a'],        
-            
+            ['callable', (object) ['name' => 'foo']],
+            ['callable', 'a'],
+
             ['float', [1]],
             ['float', true],
-            ['float', function(){}],
+            ['float', function () {
+            }],
             ['float', 1],
-            ['float', (object)['name' => 'foo']],
+            ['float', (object) ['name' => 'foo']],
             ['float', 'a'],
-            
+
             ['int', [1]],
             ['int', true],
-            ['int', function(){}],
+            ['int', function () {
+            }],
             ['int', 1.1],
-            ['int', (object)['name' => 'foo']],
+            ['int', (object) ['name' => 'foo']],
             ['int', 'a', 'b'],
-                    
+
             ['object', [1]],
             ['object', true],
             //skip this because closure pass as object
@@ -236,16 +252,17 @@ class TypedArrayTest extends TestCase
             ['object', 1.1],
             ['object', 1],
             ['object', 'a'],
-                    
+
             ['string', [1]],
             ['string', true],
-            ['string', function(){}],
+            ['string', function () {
+            }],
             ['string', 1.1],
             ['string', 1],
-            ['string', (object)['name' => 'foo']],
+            ['string', (object) ['name' => 'foo']],
         ];
     }
-    
+
     /**
      * Test assign to array a wrong typed value.
      *
