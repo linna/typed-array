@@ -35,10 +35,10 @@ class TypedObjectArray extends ArrayObject
      */
     public function __construct(string $type, array $array = [])
     {
-        if (!class_exists($type)){
-            throw new InvalidArgumentException('Type passed to '.__CLASS__.' must be an existing class');   
+        if (!class_exists($type)) {
+            throw new InvalidArgumentException('Type passed to '.__CLASS__.' must be an existing class');
         }
-        
+
         //check elements of passed array
         //I will find another method
         foreach ($array as $element) {
