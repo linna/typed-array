@@ -64,13 +64,13 @@ class TypedArrayTest extends TestCase
     function rightTypedArrayProvider()
     {
         return [
-            ['array', [[1],[2]]], //array of arrays
-            ['bool', [true, false]], //array of bools
-            ['callable', [function(){}, function(){}]], //aaray of callables
-            ['float', [1.1, 2.2]], //array of floats
-            ['int', [1, 2]], //array of integers
-            ['object', [(object)['name' => 'foo'], (object)['name' => 'bar']]], //array of objects
-            ['string', ['a', 'b']], //array of strings
+            ['array', [[1],[2]]],
+            ['bool', [true, false]],
+            ['callable', [function(){}, function(){}]],
+            ['float', [1.1, 2.2]],
+            ['int', [1, 2]],
+            ['object', [(object)['name' => 'foo'], (object)['name' => 'bar']]],
+            ['string', ['a', 'b']],
         ];
     }
     
