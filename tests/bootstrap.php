@@ -7,6 +7,5 @@
  * @copyright (c) 2017, Sebastian Rapetti
  * @license http://opensource.org/licenses/MIT MIT License
  */
-include dirname(__DIR__).'/src/intArray.php';
-include dirname(__DIR__).'/src/stringArray.php';
-include dirname(__DIR__).'/src/floatArray.php';
+include dirname(__DIR__).'/src/TypedArray.php';
+include dirname(__DIR__).'/src/TypedObjectArray.php';
