@@ -23,7 +23,7 @@ With composer:
 composer require s3b4stian/linna-array
 ```
 
-## Usage TypedArray
+## Usage - TypedArray
 ```php
 use Linna\TypedArray;
 
@@ -38,7 +38,7 @@ $array[] = 'a';
 ```
 Allowed types are: *array*, *bool*, *callable*, *float*, *int*, *object*, *string*.
 
-## Usage TypedObjectArray
+## Usage - TypedObjectArray
 ```php
 use Linna\TypedObjectArray;
 
