@@ -1,4 +1,4 @@
-![Linna Framework](logo-array.png)
+![Linna Array](logo-array.png)
 <br/>
 <br/>
 <br/>
@@ -59,12 +59,12 @@ $array[] = new Bar();
 ```
 ## Performance consideration
 Compared to the parent class [ArrayObject](http://php.net/manual/en/class.arrayobject.php) typed arrays are slower on writing
-approximately from 15x to 20x. The slowness is due to not native `__construct()` and not native `offsetSet()`.  
+approximately from 6x to 8x. The slowness is due to not native `__construct()` and not native `offsetSet()`.  
 Other operations do not have a speed difference with the native ArrayObject.
 ```php
 use Linna\TypedArray;
 
-//slower from 15x to 20x.
+//slower from 6x to 8x.
 $array = new TypedArray('int', [1, 2, 3, 4]);
 $array[] = 5;
 
@@ -74,3 +74,4 @@ $arrayElement = $array[0];
 $elements = $array->count();
 ```
 
+![Array Speed Test](array-speed-test.png)
