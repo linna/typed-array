@@ -73,5 +73,5 @@ $array[] = 5;
 $arrayElement = $array[0];
 $elements = $array->count();
 ```
-
 ![Array Speed Test](array-speed-test.png)
+View the speed test script on [gist](https://gist.github.com/s3b4stian/9441af5855b795cc1569b3cdb5e7526d).
