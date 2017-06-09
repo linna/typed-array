@@ -9,4 +9,4 @@ matrix:
   - php: nightly
 
 script:
-- phpunit
+  - vendor/bin/phpunit -c phpunit.xml
