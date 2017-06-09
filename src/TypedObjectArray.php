@@ -25,10 +25,10 @@ class TypedObjectArray extends ArrayObject
     protected $type = '';
 
     /**
-     * Contructor.
+     * Constructor.
      *
      * @param string $type
-     * @param array  $array
+     * @param array $array
      *
      * @throws InvalidArgumentException If elements of passed with $array
      *                                  are not of the configured type
@@ -36,7 +36,7 @@ class TypedObjectArray extends ArrayObject
     public function __construct(string $type, array $array = [])
     {
         if (!class_exists($type)) {
-            throw new InvalidArgumentException('Type passed to '.__CLASS__.' must be an existing class');
+            throw new InvalidArgumentException('Type passed to ' . __CLASS__ . ' must be an existing class');
         }
 
         //check elements of passed array
@@ -45,7 +45,7 @@ class TypedObjectArray extends ArrayObject
             if ($element instanceof $type) {
                 continue;
             }
-            throw new InvalidArgumentException('Elements passed to '.__CLASS__.' must be of the type '.$type);
+            throw new InvalidArgumentException('Elements passed to ' . __CLASS__ . ' must be of the type ' . $type);
         }
 
         //call parent constructor
@@ -58,19 +58,18 @@ class TypedObjectArray extends ArrayObject
      * Array style value assignment.
      *
      * @param mixed $index
-     * @param mixed $newval
+     * @param mixed $value
      *
      * @throws InvalidArgumentException If value passed with $newval are not of the configured type
      *
      * @return void
      */
-    public function offsetSet($index, $newval)
+    public function offsetSet($index, $value)
     {
-        if ($newval instanceof $this->type) {
-            parent::offsetSet($index, $newval);
-
+        if ($value instanceof $this->type) {
+            parent::offsetSet($index, $value);
             return;
         }
-        throw new InvalidArgumentException('Elements passed to '.__CLASS__.' must be of the type '.$this->type);
+        throw new InvalidArgumentException('Elements passed to ' . __CLASS__ . ' must be of the type ' . $this->type);
     }
 }

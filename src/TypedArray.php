@@ -23,13 +23,13 @@ class TypedArray extends ArrayObject
      * @var array Types supported by class
      */
     protected $allowedTypes = [
-        'array',
-        'bool',
-        'callable',
-        'float',
-        'int',
-        'object',
-        'string',
+        'array' => 1,
+        'bool' => 1,
+        'callable' => 1,
+        'float' => 1,
+        'int' => 1,
+        'object' => 1,
+        'string' => 1,
     ];
 
     /**
@@ -38,10 +38,15 @@ class TypedArray extends ArrayObject
     protected $type = '';
 
     /**
-     * Contructor.
+     * @var string Current type for array
+     */
+    protected $isType = '';
+
+    /**
+     * Constructor.
      *
      * @param string $type
-     * @param array  $array
+     * @param array $array
      *
      * @throws InvalidArgumentException If type is not supported and if
      *                                  elements of passed with $array
@@ -50,14 +55,20 @@ class TypedArray extends ArrayObject
     public function __construct(string $type, array $array = [])
     {
         //single class, multi type support :)
-        if (!in_array($type, $this->allowedTypes)) {
-            throw new InvalidArgumentException($type.' type passed to '.__CLASS__.' not supported');
+        if (!isset($this->allowedTypes[$type])) {
+            throw new InvalidArgumentException($type . ' type passed to ' . __CLASS__ . ' not supported');
         }
+
+        // type check function
+        $this->isType = 'is_' . $type;
 
         //for not utilize foreach, compare sizes of array
         //before and after apply a filter :)
-        if (count($array) > count(array_filter($array, 'is_'.$type))) {
-            throw new InvalidArgumentException('Elements passed to '.__CLASS__.' must be of the type '.$type);
+        foreach ($array as $element) {
+            if (call_user_func($this->isType, $element)) {
+                continue;
+            }
+            throw new InvalidArgumentException('Elements passed to ' . __CLASS__ . ' must be of the type ' . $type);
         }
 
         //call parent constructor
@@ -71,21 +82,18 @@ class TypedArray extends ArrayObject
      * Array style value assignment.
      *
      * @param mixed $index
-     * @param mixed $newval
+     * @param mixed $value
      *
      * @throws InvalidArgumentException If value passed with $newval are not of the configured type
      *
      * @return void
      */
-    public function offsetSet($index, $newval)
+    public function offsetSet($index, $value)
     {
-        $is_ = 'is_'.$this->type;
-
-        if ($is_($newval)) {
-            parent::offsetSet($index, $newval);
-
+        if (call_user_func($this->isType, $value)) {
+            parent::offsetSet($index, $value);
             return;
         }
-        throw new InvalidArgumentException('Elements passed to '.__CLASS__.' must be of the type '.$this->type);
+        throw new InvalidArgumentException('Elements passed to ' . __CLASS__ . ' must be of the type ' . $this->type);
     }
 }
