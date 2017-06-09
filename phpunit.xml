@@ -1,6 +1,4 @@
-<phpunit  colors="true" 
-          bootstrap="tests/bootstrap.php"
-          verbose="true">
+<phpunit colors="false" bootstrap="vendor/autoload.php" verbose="true">
     <testsuites>
         <testsuite name="Linna Array Test Suite">
             <directory suffix="Test.php">tests</directory>
@@ -9,6 +7,9 @@
     <filter>
         <whitelist>
             <directory suffix=".php">src</directory>
+            <exclude>
+                <directory>vendor</directory>
+            </exclude>
         </whitelist>
     </filter>
     <logging>
