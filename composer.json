@@ -1,14 +1,14 @@
 {
-    "name": "s3b4stian/linna-array",
+    "name": "linna/typed-array",
     "type": "library",
-    "description": "Linna Array",
+    "description": "Linna Typed Array",
     "keywords": ["Array", "Typed Array", "php"],
     "license": "MIT",
     "authors": [
         {
             "name": "Sebastian Rapetti",
             "email": "sebastian.rapetti@alice.it",
-            "homepage": "https://github.com/s3b4stian/linna-array"
+            "homepage": "https://github.com/linna/typed-array"
         }
     ],
     "require": {
