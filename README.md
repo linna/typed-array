@@ -20,7 +20,7 @@ This package require php 7.
 ## Installation
 With composer:
 ```
-composer require s3b4stian/linna-array
+composer require linna/typed-array
 ```
 
 ## Usage - TypedArray
