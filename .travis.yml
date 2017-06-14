@@ -8,5 +8,8 @@ matrix:
   allow_failures:
   - php: nightly
 
+before_script:
+- composer install
+
 script:
 - phpunit
