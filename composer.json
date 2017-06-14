@@ -2,7 +2,7 @@
     "name": "linna/typed-array",
     "type": "library",
     "description": "Linna Typed Array",
-    "keywords": ["Array", "Typed Array", "php"],
+    "keywords": ["array", "typed array", "php"],
     "license": "MIT",
     "authors": [
         {
@@ -11,6 +11,9 @@
             "homepage": "https://github.com/linna/typed-array"
         }
     ],
+    "support": {
+        "issues": "https://github.com/linna/typed-array/issues"
+    },
     "require": {
         "php": "^7.0.0"
     },

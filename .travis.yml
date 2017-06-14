@@ -9,9 +9,7 @@ matrix:
   - php: nightly
 
 before_script:
-  - composer self-update
-  - composer install --no-interaction --prefer-source
-  - cd $TRAVIS_BUILD_DIR
+- composer install
 
 script:
   - mkdir -p build/logs

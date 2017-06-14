@@ -1,4 +1,5 @@
-<phpunit colors="false" bootstrap="vendor/autoload.php" verbose="true">
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" bootstrap="vendor/autoload.php" verbose="true">
     <testsuites>
         <testsuite name="Linna Array Test Suite">
             <directory suffix="Test.php">tests</directory>
