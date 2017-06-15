@@ -23,13 +23,13 @@ class TypedArray extends ArrayObject
      * @var array Types supported by class
      */
     protected $allowedTypes = [
-        'array',
-        'bool',
-        'callable',
-        'float',
-        'int',
-        'object',
-        'string',
+        'array' => 1,
+        'bool' => 1,
+        'callable' => 1,
+        'float' => 1,
+        'int' => 1,
+        'object' => 1,
+        'string' => 1
     ];
 
     /**
@@ -50,7 +50,7 @@ class TypedArray extends ArrayObject
     public function __construct(string $type, array $array = [])
     {
         //single class, multi type support :)
-        if (!in_array($type, $this->allowedTypes)) {
+        if (!isset($this->allowedTypes[$type])) {
             throw new InvalidArgumentException($type.' type passed to '.__CLASS__.' not supported');
         }
 
