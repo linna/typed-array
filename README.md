@@ -36,7 +36,7 @@ $array = new TypedArray('int', [1, 'a', 3, 4]);
 //throw InvalidArgumentException.
 $array[] = 'a';
 ```
-Allowed types are: *array*, *bool*, *callable*, *float*, *int*, *object*, *string*.
+> **Note:** Allowed types are: *array*, *bool*, *callable*, *float*, *int*, *object*, *string*.
 
 ## Usage - TypedObjectArray
 ```php
