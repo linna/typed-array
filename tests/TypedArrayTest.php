@@ -40,7 +40,7 @@ class TypedArrayTest extends TestCase
      *
      * @dataProvider allowedTypeProvider
      */
-    public function testCreateInstance($type)
+    public function testNewInstance($type)
     {
         $this->assertInstanceOf(TypedArray::class, (new TypedArray($type)));
     }
@@ -50,7 +50,7 @@ class TypedArrayTest extends TestCase
      *
      * @expectedException InvalidArgumentException
      */
-    public function testCreateInstanceWithNotAllowedType()
+    public function testNewInstanceWithNotAllowedType()
     {
         $this->assertInstanceOf(TypedArray::class, (new TypedArray('notAllowedType')));
     }
