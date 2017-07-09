@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unrelased ][v1.0.3](https://github.com/linna/typed-array/compare/v1.0.1...v1.0.3) - 2017-XX-XX
 
+### Changed
+* `Linna\TypedArray` exception messages updated
+* `Linna\TypedObjectArray` exception messages updated
+
 ### Fixed
 * `CHANGELOG.md` links url
 
@@ -24,5 +28,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [v1.0.0](https://github.com/linna/typed-array/compare/v1.0.0...master) - 2017-06-07
 
 ### Added
-* `Linna\TypedArray` for create arrays that accept only values of the user defined type.
-* `Linna\TypedObjectArray` for create arrays that accept only class instances of the user defined type.
+* `Linna\TypedArray` for create arrays that accept only values of the user defined type
+* `Linna\TypedObjectArray` for create arrays that accept only class instances of the user defined type

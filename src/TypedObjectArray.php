@@ -36,7 +36,7 @@ class TypedObjectArray extends ArrayObject
     public function __construct(string $type, array $array = [])
     {
         if (!class_exists($type)) {
-            throw new InvalidArgumentException('Type passed to '.__CLASS__.' must be an existing class');
+            throw new InvalidArgumentException(__CLASS__.': Type passed to '.__METHOD__.' must be an existing class');
         }
 
         //check elements of passed array
@@ -45,7 +45,7 @@ class TypedObjectArray extends ArrayObject
             if ($element instanceof $type) {
                 continue;
             }
-            throw new InvalidArgumentException('Elements passed to '.__CLASS__.' must be of the type '.$type);
+            throw new InvalidArgumentException(__CLASS__.': Elements passed to '.__METHOD__.' must be of the type '.$type.'.');
         }
 
         //call parent constructor
@@ -71,6 +71,6 @@ class TypedObjectArray extends ArrayObject
 
             return;
         }
-        throw new InvalidArgumentException('Elements passed to '.__CLASS__.' must be of the type '.$this->type);
+        throw new InvalidArgumentException(__CLASS__.': Elements passed to '.__CLASS__.' must be of the type '.$this->type.'.');
     }
 }

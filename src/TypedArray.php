@@ -51,13 +51,13 @@ class TypedArray extends ArrayObject
     {
         //single class, multi type support :)
         if (!isset($this->allowedTypes[$type])) {
-            throw new InvalidArgumentException($type.' type passed to '.__CLASS__.' not supported');
+            throw new InvalidArgumentException(__CLASS__.': '.$type.' type passed to '.__METHOD__.' not supported.');
         }
 
         //for not utilize foreach, compare sizes of array
         //before and after apply a filter :)
         if (count($array) > count(array_filter($array, 'is_'.$type))) {
-            throw new InvalidArgumentException('Elements passed to '.__CLASS__.' must be of the type '.$type);
+            throw new InvalidArgumentException(__CLASS__.': Elements passed to '.__METHOD__.' must be of the type '.$type.'.');
         }
 
         //call parent constructor
@@ -86,6 +86,6 @@ class TypedArray extends ArrayObject
 
             return;
         }
-        throw new InvalidArgumentException('Elements passed to '.__CLASS__.' must be of the type '.$this->type);
+        throw new InvalidArgumentException(__CLASS__.': Elements passed to '.__CLASS__.' must be of the type '.$this->type.'.');
     }
 }
