@@ -3,12 +3,12 @@
     "type": "library",
     "description": "Linna Typed Array",
     "keywords": ["array", "typed array", "php"],
+    "homepage": "https://github.com/linna/typed-array",
     "license": "MIT",
     "authors": [
         {
             "name": "Sebastian Rapetti",
-            "email": "sebastian.rapetti@alice.it",
-            "homepage": "https://github.com/linna/typed-array"
+            "email": "sebastian.rapetti@alice.it"
         }
     ],
     "support": {
