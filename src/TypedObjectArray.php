@@ -28,7 +28,7 @@ class TypedObjectArray extends ArrayObject
 
     /**
      * __construct.
-     * 
+     *
      * Class Contructor.
      *
      * @param string $type
@@ -60,7 +60,7 @@ class TypedObjectArray extends ArrayObject
 
     /**
      * offsetSet.
-     * 
+     *
      * Array style value assignment.
      *
      * @ignore
