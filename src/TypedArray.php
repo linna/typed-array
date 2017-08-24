@@ -15,7 +15,9 @@ use ArrayObject;
 use InvalidArgumentException;
 
 /**
- * Create an array of typed elements.
+ * Typed Array.
+ *
+ * Provide a way for create an array of typed elements with php.
  */
 class TypedArray extends ArrayObject
 {
@@ -69,6 +71,8 @@ class TypedArray extends ArrayObject
 
     /**
      * Array style value assignment.
+     *
+     * @ignore
      *
      * @param mixed $index
      * @param mixed $newval
