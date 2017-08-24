@@ -6,11 +6,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unrelased ][v1.0.3](https://github.com/linna/typed-array/compare/v1.0.1...v1.0.3) - 2017-XX-XX
+## [v1.0.3](https://github.com/linna/typed-array/compare/v1.0.2...v1.0.3) - 2017-08-24
 
 ### Changed
 * `Linna\TypedArray` exception messages updated
 * `Linna\TypedObjectArray` exception messages updated
+* Docblocks updated
+* Function call for variable handling refactor
 
 ### Fixed
 * `CHANGELOG.md` links url
