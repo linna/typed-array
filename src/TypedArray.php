@@ -25,13 +25,13 @@ class TypedArray extends ArrayObject
      * @var array Types supported by class
      */
     protected $allowedTypes = [
-        'array' => 1,
-        'bool' => 1,
-        'callable' => 1,
-        'float' => 1,
-        'int' => 1,
-        'object' => 1,
-        'string' => 1
+        'array' => 'is_array',
+        'bool' => 'is_bool',
+        'callable' => 'is_callable',
+        'float' => 'is_float',
+        'int' => 'is_int',
+        'object' => 'is_object',
+        'string' => 'is_string'
     ];
 
     /**
@@ -40,7 +40,9 @@ class TypedArray extends ArrayObject
     protected $type = '';
 
     /**
-     * Contructor.
+     * __construct.
+     * 
+     * Class Contructor.
      *
      * @param string $type
      * @param array  $array
@@ -55,10 +57,10 @@ class TypedArray extends ArrayObject
         if (!isset($this->allowedTypes[$type])) {
             throw new InvalidArgumentException(__CLASS__.': '.$type.' type passed to '.__METHOD__.' not supported.');
         }
-
+        
         //for not utilize foreach, compare sizes of array
         //before and after apply a filter :)
-        if (count($array) > count(array_filter($array, 'is_'.$type))) {
+        if (count($array) > count(array_filter($array, $this->allowedTypes[$type]))) {
             throw new InvalidArgumentException(__CLASS__.': Elements passed to '.__METHOD__.' must be of the type '.$type.'.');
         }
 
@@ -70,6 +72,8 @@ class TypedArray extends ArrayObject
     }
 
     /**
+     * offsetSet.
+     * 
      * Array style value assignment.
      *
      * @ignore
@@ -83,13 +87,12 @@ class TypedArray extends ArrayObject
      */
     public function offsetSet($index, $newval)
     {
-        $is_ = 'is_'.$this->type;
-
-        if ($is_($newval)) {
+        if (($this->allowedTypes[$this->type])($newval)) {
             parent::offsetSet($index, $newval);
 
             return;
         }
+        
         throw new InvalidArgumentException(__CLASS__.': Elements passed to '.__CLASS__.' must be of the type '.$this->type.'.');
     }
 }
