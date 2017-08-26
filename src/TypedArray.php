@@ -87,7 +87,7 @@ class TypedArray extends ArrayObject
      */
     public function offsetSet($index, $newval)
     {
-        if (($this->allowedTypes[$this->type])($newval)) {
+        if ($this->allowedTypes[$this->type]($newval)) {
             parent::offsetSet($index, $newval);
 
             return;
