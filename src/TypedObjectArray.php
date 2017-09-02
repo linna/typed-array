@@ -48,7 +48,7 @@ class TypedObjectArray extends ArrayObject
      * </code></pre>
      *
      * <b>Note</b>: Allowed types are only <i>existing classes</i>.
-     * 
+     *
      * @param string $type  Type for values inside array.
      * @param array  $array Optional, if you wish initialize object with values.
      *
