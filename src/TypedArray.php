@@ -40,16 +40,29 @@ class TypedArray extends ArrayObject
     protected $type = '';
 
     /**
-     * __construct.
-     *
      * Class Contructor.
      *
-     * @param string $type
-     * @param array  $array
+     * <pre><code class="php">use Linna\TypedArray;
      *
-     * @throws InvalidArgumentException If type is not supported and if
-     *                                  elements of passed with $array
-     *                                  are not of the configured type
+     * //correct, only int passed to array.
+     * $array = new TypedArray('int', [1, 2, 3, 4]);
+     * $array[] = 5;
+     *
+     * //throw InvalidArgumentException.
+     * $array = new TypedArray('int', [1, 'a', 3, 4]);
+     * //throw InvalidArgumentException.
+     * $array[] = 'a';
+     * </code></pre>
+     *
+     * <b>Note</b>: Allowed types are only <i>array</i>, <i>bool</i>, <i>callable</i>,
+     * <i>float</i>, <i>int</i>, <i>object</i> and <i>string</i>.
+     *
+     * @param string $type  Type for values inside array.
+     * @param array  $array Optional, if you wish initialize object with values.
+     *
+     * @throws InvalidArgumentException If type is not supported or if
+     *                                  elements in the optional array parameter
+     *                                  aren't of the configured type.
      */
     public function __construct(string $type, array $array = [])
     {

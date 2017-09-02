@@ -27,15 +27,33 @@ class TypedObjectArray extends ArrayObject
     protected $type = '';
 
     /**
-     * __construct.
-     *
      * Class Contructor.
      *
-     * @param string $type
-     * @param array  $array
+     * <pre><code class="php">use Linna\TypedObjectArray;
      *
-     * @throws InvalidArgumentException If elements of passed with $array
-     *                                  are not of the configured type
+     * //correct, only Foo class instances passed to array.
+     * $array = new TypedObjectArray(Foo::class, [
+     *     new Foo(),
+     *     new Foo()
+     * ]);
+     * $array[] = new Foo();
+     *
+     * //throw InvalidArgumentException.
+     * $array = new TypedObjectArray(Foo::class, [
+     *     new Foo(),
+     *     new Bar()
+     * ]);
+     * //throw InvalidArgumentException.
+     * $array[] = new Bar();
+     * </code></pre>
+     *
+     * <b>Note</b>: Allowed types are only <i>existing classes</i>.
+     * 
+     * @param string $type  Type for values inside array.
+     * @param array  $array Optional, if you wish initialize object with values.
+     *
+     * @throws InvalidArgumentException If elements in the optional array parameter
+     *                                  aren't of the configured type.
      */
     public function __construct(string $type, array $array = [])
     {
