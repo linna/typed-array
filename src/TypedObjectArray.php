@@ -15,8 +15,6 @@ use ArrayObject;
 use InvalidArgumentException;
 
 /**
- * Typed Array.
- *
  * Provide a way for create an array of typed objects with php.
  */
 class TypedObjectArray extends ArrayObject
@@ -77,8 +75,6 @@ class TypedObjectArray extends ArrayObject
     }
 
     /**
-     * offsetSet.
-     *
      * Array style value assignment.
      *
      * @ignore
