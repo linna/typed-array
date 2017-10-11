@@ -42,12 +42,15 @@ class TypedObjectArrayTest extends TestCase
     {
         $this->assertInstanceOf(
             TypedObjectArray::class,
-            (new TypedObjectArray(
-                ArrayObject::class, [
+            (
+                new TypedObjectArray(
+                ArrayObject::class,
+                [
                     new ArrayObject([1, 2, 3]),
                     new ArrayObject([1.1, 2.2, 3.3]),
                     new ArrayObject(['a', 'b', 'c']),
-                ])
+                ]
+            )
             )
         );
     }
@@ -61,12 +64,15 @@ class TypedObjectArrayTest extends TestCase
     {
         $this->assertInstanceOf(
             TypedObjectArray::class,
-            (new TypedObjectArray(
-                ArrayObject::class, [
+            (
+                new TypedObjectArray(
+                ArrayObject::class,
+                [
                     new ArrayObject([1, 2, 3]),
                     new ArrayObject([1.1, 2.2, 3.3]),
                     new SplStack(),
-                ])
+                ]
+            )
             )
         );
     }
