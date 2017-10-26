@@ -69,7 +69,8 @@ class TypedObjectArray extends ArrayObject
         }
 
         //call parent constructor
-        parent::__construct($array, 0, 'ArrayIterator');
+        parent::__construct($array);
+        
         //store array type
         $this->type = $type;
     }
@@ -93,6 +94,7 @@ class TypedObjectArray extends ArrayObject
 
             return;
         }
+        
         throw new InvalidArgumentException(__CLASS__.': Elements passed to '.__CLASS__.' must be of the type '.$this->type.'.');
     }
 }

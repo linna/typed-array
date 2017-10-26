@@ -76,7 +76,7 @@ class TypedArray extends ArrayObject
         }
 
         //call parent constructor
-        parent::__construct($array, 0, 'ArrayIterator');
+        parent::__construct($array);
 
         //store array type
         $this->type = $type;
