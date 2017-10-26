@@ -17,6 +17,11 @@
     "require": {
         "php": "^7.0.0"
     },
+    "require-dev": {
+        "infection/infection": "^0.6",
+        "phpstan/phpstan": "^0.8.5",
+        "phpunit/phpunit": "^6.4"
+    },
     "autoload": {
         "psr-4": {
             "Linna\\": "src/"
