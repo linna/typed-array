@@ -35,14 +35,14 @@ class TypedObjectArray extends ArrayObject
      *     new Foo()
      * ]);
      * $array[] = new Foo();
+     * //throw InvalidArgumentException.
+     * $array[] = new Bar();
      *
      * //throw InvalidArgumentException.
      * $array = new TypedObjectArray(Foo::class, [
      *     new Foo(),
      *     new Bar()
      * ]);
-     * //throw InvalidArgumentException.
-     * $array[] = new Bar();
      * </code></pre>
      *
      * <b>Note</b>: Allowed types are only <i>existing classes</i>.

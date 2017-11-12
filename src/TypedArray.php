@@ -45,11 +45,11 @@ class TypedArray extends ArrayObject
      * //correct, only int passed to array.
      * $array = new TypedArray('int', [1, 2, 3, 4]);
      * $array[] = 5;
+     * //throw InvalidArgumentException.
+     * $array[] = 'a';
      *
      * //throw InvalidArgumentException.
      * $array = new TypedArray('int', [1, 'a', 3, 4]);
-     * //throw InvalidArgumentException.
-     * $array[] = 'a';
      * </code></pre>
      *
      * <b>Note</b>: Allowed types are only <i>array</i>, <i>bool</i>, <i>callable</i>,

@@ -30,11 +30,11 @@ use Linna\TypedArray;
 //correct, only int passed to array.
 $array = new TypedArray('int', [1, 2, 3, 4]);
 $array[] = 5;
+//throw InvalidArgumentException.
+$array[] = 'a';
 
 //throw InvalidArgumentException.
 $array = new TypedArray('int', [1, 'a', 3, 4]);
-//throw InvalidArgumentException.
-$array[] = 'a';
 ```
 > **Note:** Allowed types are: *array*, *bool*, *callable*, *float*, *int*, *object*, *string*.
 
@@ -48,14 +48,14 @@ $array = new TypedObjectArray(Foo::class, [
     new Foo()
 ]);
 $array[] = new Foo();
+//throw InvalidArgumentException.
+$array[] = new Bar();
 
 //throw InvalidArgumentException.
 $array = new TypedObjectArray(Foo::class, [
     new Foo(),
     new Bar()
 ]);
-//throw InvalidArgumentException.
-$array[] = new Bar();
 ```
 ## Performance consideration
 Compared to the parent class [ArrayObject](http://php.net/manual/en/class.arrayobject.php) typed arrays are slower on writing
