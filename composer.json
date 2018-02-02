@@ -15,10 +15,10 @@
         "issues": "https://github.com/linna/typed-array/issues"
     },
     "require": {
-        "php": "^7.0.0"
+        "php": "^7.0"
     },
     "require-dev": {
-        "infection/infection": "^0.6",
+        "infection/infection": "^0.7",
         "phpstan/phpstan": "^0.9",
         "phpunit/phpunit": "^6.0"
     },
