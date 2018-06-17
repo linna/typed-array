@@ -98,7 +98,7 @@ class TypedObjectArrayTest extends TestCase
         $array = new TypedObjectArray(ArrayObject::class);
         $array[] = new SplStack();
     }
-    
+
     /**
      * Test iterator.
      */
@@ -110,9 +110,9 @@ class TypedObjectArrayTest extends TestCase
             new ArrayObject([true, false, null]),
             new ArrayObject([1.0, 2.0, 3.0])
         ];
-        
+
         $array = new TypedObjectArray(ArrayObject::class, $arrayAsParam);
-        
+
         foreach ($array as $key => $value) {
             $this->assertEquals($value, $arrayAsParam[$key]);
         }

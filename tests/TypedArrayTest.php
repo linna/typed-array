@@ -274,7 +274,7 @@ class TypedArrayTest extends TestCase
         $array = new TypedArray($type);
         $array[] = $value;
     }
-    
+
     /**
      * Test iterator.
      */
@@ -282,7 +282,7 @@ class TypedArrayTest extends TestCase
     {
         $arrayAsParam = ['a','b','c','d','e','f','g','h','i'];
         $array = new TypedArray('string', $arrayAsParam);
-        
+
         foreach ($array as $key => $value) {
             $this->assertEquals($value, $arrayAsParam[$key]);
         }
