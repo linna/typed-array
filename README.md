@@ -24,31 +24,31 @@ composer require linna/typed-array
 use Linna\TypedArray;
 
 //correct, only int passed to constructor.
-$array = new TypedArray('int', [1, 2, 3, 4]);
+$intArray = new TypedArray('int', [1, 2, 3, 4]);
 
 //correct, int assigned
-$array[] = 5;
+$intArray[] = 5;
 
 //throw InvalidArgumentException, string assigned.
-$array[] = 'a';
+$intArray[] = 'a';
 
 //throw InvalidArgumentException, mixed array passed to constructor.
-$array = new TypedArray('int', [1, 'a', 3, 4]);
+$otherIntArray = new TypedArray('int', [1, 'a', 3, 4]);
 
 //correct, only Foo class instances passed to constructor.
-$array = new TypedArray(Foo::class, [
+$fooArray = new TypedArray(Foo::class, [
     new Foo(),
     new Foo()
 ]);
 
 //correct, Foo() instance assigned.
-$array[] = new Foo();
+$fooArray[] = new Foo();
 
 //throw InvalidArgumentException, Bar() instance assigned.
-$array[] = new Bar();
+$fooArray[] = new Bar();
 
 //throw InvalidArgumentException, mixed array of instances passed to constructor.
-$array = new TypedArray(Foo::class, [
+$otherFooArray = new TypedArray(Foo::class, [
     new Foo(),
     new Bar()
 ]);
