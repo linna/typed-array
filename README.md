@@ -36,7 +36,7 @@ $array[] = 'a';
 $array = new TypedArray('int', [1, 'a', 3, 4]);
 
 //correct, only Foo class instances passed to constructor.
-$array = new TypedObjectArray(Foo::class, [
+$array = new TypedArray(Foo::class, [
     new Foo(),
     new Foo()
 ]);
@@ -48,7 +48,7 @@ $array[] = new Foo();
 $array[] = new Bar();
 
 //throw InvalidArgumentException, mixed array of instances passed to constructor.
-$array = new TypedObjectArray(Foo::class, [
+$array = new TypedArray(Foo::class, [
     new Foo(),
     new Bar()
 ]);
