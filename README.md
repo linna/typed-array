@@ -10,10 +10,6 @@
 
 This package provide typed arrays for php as extension of native [ArrayObject](http://php.net/manual/en/class.arrayobject.php).  
 
-Package contain two classes:  
-**TypedArray** for arrays that accept only values of the user defined type.  
-**TypedObjectArray** for arrays that accept only class instances of the user defined type.
-
 ## Requirements
 This package require php 7.
 
@@ -27,36 +23,45 @@ composer require linna/typed-array
 ```php
 use Linna\TypedArray;
 
-//correct, only int passed to array.
+//correct, only int passed to constructor.
 $array = new TypedArray('int', [1, 2, 3, 4]);
+
+//correct, int assigned
 $array[] = 5;
-//throw InvalidArgumentException.
+
+//throw InvalidArgumentException, string assigned.
 $array[] = 'a';
 
-//throw InvalidArgumentException.
+//throw InvalidArgumentException, mixed array passed to constructor.
 $array = new TypedArray('int', [1, 'a', 3, 4]);
-```
-> **Note:** Allowed types are: *array*, *bool*, *callable*, *float*, *int*, *object*, *string*.
 
-## Usage - TypedObjectArray
-```php
-use Linna\TypedObjectArray;
-
-//correct, only Foo class instances passed to array.
+//correct, only Foo class instances passed to constructor.
 $array = new TypedObjectArray(Foo::class, [
     new Foo(),
     new Foo()
 ]);
+
+//correct, Foo() instance assigned.
 $array[] = new Foo();
-//throw InvalidArgumentException.
+
+//throw InvalidArgumentException, Bar() instance assigned.
 $array[] = new Bar();
 
-//throw InvalidArgumentException.
+//throw InvalidArgumentException, mixed array of instances passed to constructor.
 $array = new TypedObjectArray(Foo::class, [
     new Foo(),
     new Bar()
 ]);
 ```
+
+> **Note:** Allowed types are: *array*, *bool*, *callable*, *float*, *int*, *object*, *string* and all existing classes.
+
+## Performance consideration for v2.0
+Compared to first version of the library, this version is a bit slower because after merging `TypedObjectArray` with `TypedArray`,
+there are more code that be executed when new instance is created and on assign operations.
+
+![Array Speed Test](array-speed-test-v2.png)
+
 ## Performance consideration
 Compared to the parent class [ArrayObject](http://php.net/manual/en/class.arrayobject.php) typed arrays are slower on writing
 approximately from 6x to 8x. The slowness is due to not native `__construct()` and not native `offsetSet()`.  
