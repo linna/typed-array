@@ -9,7 +9,11 @@
  */
 declare(strict_types=1);
 
+namespace Linna\Tests;
+
 use Linna\TypedObjectArray;
+use ArrayObject;
+use SplStack;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -113,8 +117,6 @@ class TypedObjectArrayTest extends TestCase
 
         $array = new TypedObjectArray(ArrayObject::class, $arrayAsParam);
 
-        foreach ($array as $key => $value) {
-            $this->assertEquals($value, $arrayAsParam[$key]);
-        }
+        $this->assertEquals($arrayAsParam, iterator_to_array($array));
     }
 }
