@@ -26,5 +26,10 @@
         "psr-4": {
             "Linna\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Linna\\Tests\\": "tests/"
+        }
     }
 }
