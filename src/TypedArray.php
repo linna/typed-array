@@ -65,7 +65,7 @@ class TypedArray extends ArrayObject
     public function __construct(string $type, array $array = [])
     {
         //single class, multi type support :)
-        if (!isset($this->allowedTypes[$type])) {
+        if (empty($this->allowedTypes[$type])) {
             throw new InvalidArgumentException(__CLASS__.': '.$type.' type passed to '.__METHOD__.' not supported.');
         }
 
