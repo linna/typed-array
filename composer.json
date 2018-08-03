@@ -28,6 +28,8 @@
         }
     },
     "autoload-dev": {
-        "classmap": ["tests/"]
+        "psr-4": {
+            "Linna\\Tests\\": "tests/"
+        }
     }
 }

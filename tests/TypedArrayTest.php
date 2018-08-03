@@ -9,6 +9,8 @@
  */
 declare(strict_types=1);
 
+namespace Linna\Tests;
+
 use Linna\TypedArray;
 use PHPUnit\Framework\TestCase;
 
@@ -283,9 +285,7 @@ class TypedArrayTest extends TestCase
         $arrayAsParam = ['a','b','c','d','e','f','g','h','i'];
         $array = new TypedArray('string', $arrayAsParam);
 
-        foreach ($array as $key => $value) {
-            $this->assertEquals($value, $arrayAsParam[$key]);
-        }
+        $this->assertEquals($arrayAsParam, iterator_to_array($array));
     }
 
     /**
