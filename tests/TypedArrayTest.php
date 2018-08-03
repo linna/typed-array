@@ -287,4 +287,97 @@ class TypedArrayTest extends TestCase
 
         $this->assertEquals($arrayAsParam, iterator_to_array($array));
     }
+
+    /**
+     * Test new instance with not existent class.
+     *
+     * @expectedException InvalidArgumentException
+     */
+    public function testCreateInstanceWithNotExistentClass()
+    {
+        $this->assertInstanceOf(TypedArray::class, (new TypedArray(ArrayBadObject::class)));
+    }
+
+    /**
+     * Test new instance passing right typed array to constructor.
+     */
+    public function testCreateInstanceWithRightObjectTypedArray()
+    {
+        $this->assertInstanceOf(
+            TypedArray::class,
+            (
+                new TypedArray(
+                ArrayObject::class,
+                [
+                    new ArrayObject([1, 2, 3]),
+                    new ArrayObject([1.1, 2.2, 3.3]),
+                    new ArrayObject(['a', 'b', 'c']),
+                ]
+            )
+            )
+        );
+    }
+
+    /**
+     * Test new instance passing array with invalid element to constructor.
+     *
+     * @expectedException InvalidArgumentException
+     */
+    public function testCreateInstanceWithWrongObjectTypedArray()
+    {
+        $this->assertInstanceOf(
+            TypedArray::class,
+            (
+                new TypedArray(
+                ArrayObject::class,
+                [
+                    new ArrayObject([1, 2, 3]),
+                    new ArrayObject([1.1, 2.2, 3.3]),
+                    new SplStack(),
+                ]
+            )
+            )
+        );
+    }
+
+    /**
+     * Test assign to array a right typed value.
+     */
+    public function testAssignrRightTypedObjectValueToArray()
+    {
+        $array = new TypedArray(ArrayObject::class);
+        $array[] = new ArrayObject([1, 2, 3]);
+
+        $this->assertEquals(1, $array->count());
+    }
+
+    /**
+     * Test assign to array a wrong typed value.
+     *
+     * @expectedException InvalidArgumentException
+     */
+    public function testAssignWrongTypedObjectValueToArray()
+    {
+        $array = new TypedArray(ArrayObject::class);
+        $array[] = new SplStack();
+    }
+
+    /**
+     * Test iterator.
+     */
+    public function testObjectIteratorClass()
+    {
+        $arrayAsParam = [
+            new ArrayObject([1, 2, 3]),
+            new ArrayObject(['1', '2', '3']),
+            new ArrayObject([true, false, null]),
+            new ArrayObject([1.0, 2.0, 3.0])
+        ];
+
+        $array = new TypedArray(ArrayObject::class, $arrayAsParam);
+
+        foreach ($array as $key => $value) {
+            $this->assertEquals($value, $arrayAsParam[$key]);
+        }
+    }
 }

@@ -45,15 +45,33 @@ class TypedArray extends ArrayObject
      * //correct, only int passed to array.
      * $array = new TypedArray('int', [1, 2, 3, 4]);
      * $array[] = 5;
+     *
      * //throw InvalidArgumentException.
      * $array[] = 'a';
      *
      * //throw InvalidArgumentException.
      * $array = new TypedArray('int', [1, 'a', 3, 4]);
+     *
+     * //correct, only Foo class instances passed to array.
+     * $array = new TypedArray(Foo::class, [
+     *     new Foo(),
+     *     new Foo()
+     * ]);
+     *
+     * $array[] = new Foo();
+     *
+     * //throw InvalidArgumentException.
+     * $array[] = new Bar();
+     *
+     * //throw InvalidArgumentException.
+     * $array = new TypedArray(Foo::class, [
+     *     new Foo(),
+     *     new Bar()
+     * ]);
      * </code></pre>
      *
-     * <b>Note</b>: Allowed types are only <i>array</i>, <i>bool</i>, <i>callable</i>,
-     * <i>float</i>, <i>int</i>, <i>object</i> and <i>string</i>.
+     * <b>Note</b>: Allowed types are <i>array</i>, <i>bool</i>, <i>callable</i>,
+     * <i>float</i>, <i>int</i>, <i>object</i>, <i>string</i> and all existing classes.
      *
      * @param string $type  Type for values inside array.
      * @param array  $array Optional, if you wish initialize object with values.
@@ -64,6 +82,16 @@ class TypedArray extends ArrayObject
      */
     public function __construct(string $type, array $array = [])
     {
+        if (class_exists($type)) {
+            //I like lambda functions ;)
+            $this->allowedTypes[$type] = function ($a) use ($type) {
+                if ($a instanceof $type) {
+                    return true;
+                }
+                return false;
+            };
+        }
+
         //single class, multi type support :)
         if (empty($this->allowedTypes[$type])) {
             throw new InvalidArgumentException(__CLASS__.': '.$type.' type passed to '.__METHOD__.' not supported.');
@@ -96,6 +124,12 @@ class TypedArray extends ArrayObject
      */
     public function offsetSet($index, $newval)
     {
+        if ($newval instanceof $this->type) {
+            parent::offsetSet($index, $newval);
+
+            return;
+        }
+
         if ($this->allowedTypes[$this->type]($newval)) {
             parent::offsetSet($index, $newval);
 
