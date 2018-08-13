@@ -6,10 +6,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [v2.0.0](https://github.com/linna/typed-array/compare/v1.0.4...v2.0.0) - 2018-XX-XX
+## [v2.0.0](https://github.com/linna/typed-array/compare/v1.0.5...v2.0.0) - 2018-08-13
 
 ### Changed
 * `Linna\TypedObjectArray` merged into `Linna\TypedArray`
+* Merge pull request #11 from peter279k/test_enhancement with code enhancements
+
+### Removed
+* `Linna\TypedObjectArray`
+
+## [v1.0.5](https://github.com/linna/typed-array/compare/v1.0.4...v1.0.5) - 2018-08-13
+
+### Changed
+* Merge pull request #11 from peter279k/test_enhancement with code enhancements
 
 ## [v1.0.4](https://github.com/linna/typed-array/compare/v1.0.3...v1.0.4) - 2017-10-26
 
