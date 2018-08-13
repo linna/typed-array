@@ -11,7 +11,7 @@
 This package provide typed arrays for php as extension of native [ArrayObject](http://php.net/manual/en/class.arrayobject.php).  
 
 ## Requirements
-This package require php 7.
+This package require php 7.1
 
 ## Installation
 With composer:
