@@ -93,7 +93,7 @@ class TypedArray extends ArrayObject
         }
 
         //single class, multi type support :)
-        if (!isset($this->allowedTypes[$type])) {
+        if (empty($this->allowedTypes[$type])) {
             throw new InvalidArgumentException(__CLASS__.': '.$type.' type passed to '.__METHOD__.' not supported.');
         }
 
