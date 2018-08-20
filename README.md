@@ -1,13 +1,25 @@
-![Linna Array](logo-array.png)
+<div align="center">
+    <a href="#"><img src="logo-linna-96.png" alt="Linna Logo"></a>
+</div>
+
 <br/>
+
+<div align="center">
+    <a href="#"><img src="logo-array.png" alt="Linna dotenv Logo"></a>
+</div>
+
 <br/>
-<br/>
+
+<div align="center">
+
 [![Build Status](https://travis-ci.org/linna/typed-array.svg?branch=master)](https://travis-ci.org/linna/typed-array)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/linna/typed-array/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/linna/typed-array/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/linna/typed-array/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/linna/typed-array/?branch=master)
 [![StyleCI](https://styleci.io/repos/93407083/shield?branch=master&style=flat)](https://styleci.io/repos/93407083)
 
+</div>
 
+## About
 This package provide typed arrays for php as extension of native [ArrayObject](http://php.net/manual/en/class.arrayobject.php).  
 
 ## Requirements
@@ -19,7 +31,7 @@ With composer:
 composer require linna/typed-array
 ```
 
-## Usage - TypedArray
+## Usage
 ```php
 use Linna\TypedArray;
 
