@@ -82,7 +82,7 @@ class TypedArray extends ArrayObject
      */
     public function __construct(string $type, array $array = [])
     {
-        if (class_exists($type)) {
+        if (\class_exists($type)) {
             //I like lambda functions ;)
             $this->allowedTypes[$type] = function ($a) use ($type) {
                 if ($a instanceof $type) {
@@ -99,7 +99,7 @@ class TypedArray extends ArrayObject
 
         //for not utilize foreach, compare sizes of array
         //before and after apply a filter :)
-        if (count($array) > count(array_filter($array, $this->allowedTypes[$type]))) {
+        if (\count($array) > \count(\array_filter($array, $this->allowedTypes[$type]))) {
             throw new InvalidArgumentException(__CLASS__.': Elements passed to '.__METHOD__.' must be of the type '.$type.'.');
         }
 
