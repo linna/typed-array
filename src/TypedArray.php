@@ -85,10 +85,7 @@ class TypedArray extends ArrayObject
         if (class_exists($type)) {
             //I like lambda functions ;)
             $this->allowedTypes[$type] = function ($a) use ($type) {
-                if ($a instanceof $type) {
-                    return true;
-                }
-                return false;
+                return $a instanceof $type;
             };
         }
 
