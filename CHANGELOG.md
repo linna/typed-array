@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - php 7.3 support
 
 ### Changed
-- `.scrutinizer.yml` updated for use phpunit from `vendor` direcotry
+- `.scrutinizer.yml` updated for use phpunit from `vendor` directory
 - Merge pull request #14 from peter279k/enhance_stuffs with code enhancements
 
 ## [v2.0.0](https://github.com/linna/typed-array/compare/v1.0.5...v2.0.0) - 2018-08-13
