@@ -287,7 +287,7 @@ class TypedArrayTest extends TestCase
         $arrayAsParam = ['a','b','c','d','e','f','g','h','i'];
         $array = new TypedArray('string', $arrayAsParam);
 
-        $this->assertEquals($arrayAsParam, iterator_to_array($array));
+        $this->assertEquals($arrayAsParam, \iterator_to_array($array));
     }
 
     /**
@@ -309,8 +309,8 @@ class TypedArrayTest extends TestCase
             TypedArray::class,
             (
                 new TypedArray(
-                ArrayObject::class,
-                [
+                    ArrayObject::class,
+                    [
                     new ArrayObject([1, 2, 3]),
                     new ArrayObject([1.1, 2.2, 3.3]),
                     new ArrayObject(['a', 'b', 'c']),
@@ -331,8 +331,8 @@ class TypedArrayTest extends TestCase
             TypedArray::class,
             (
                 new TypedArray(
-                ArrayObject::class,
-                [
+                    ArrayObject::class,
+                    [
                     new ArrayObject([1, 2, 3]),
                     new ArrayObject([1.1, 2.2, 3.3]),
                     new SplStack(),
