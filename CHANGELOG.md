@@ -6,6 +6,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v3.0.0](https://github.com/linna/typed-array/compare/v2.0.1...v3.0.0) - 2020-XX-XX
+
+### Added
+- php 8.0 support
+- `ArrayArrayObject` class
+- `BoolArrayObject` class
+- `CallableArrayObject` class
+- `ClassArrayObject` class
+- `FloatArrayObject` class
+- `IntArrayObject` class
+- `ObjectArrayObject` class
+- `StringArrayObject` class
+
+### Changed
+- namespace from `Linna` to `Linna\TypedArrayObject`
+- type chek is performed als on method `ArrayObject->append()`
+
+### removed
+- `Linna\TypedArray` class
+
 ## [v2.0.1](https://github.com/linna/typed-array/compare/v2.0.0...v2.0.1) - 2020-03-23
 
 ### Added

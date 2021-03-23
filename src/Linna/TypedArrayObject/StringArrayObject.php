@@ -33,9 +33,14 @@ class StringArrayObject extends ArrayObject
      */
     public function __construct(array $input = [], int $flags = 0, string $iterator_class = "ArrayIterator")
     {
-        //to avoid foreach, compare sizes of array
-        //before and after apply a filter :)
-        if (\count($input) > \count(\array_filter($input, 'is_string'))) {
+        //get input array len
+        $count = \count($input);
+        //check for invalid values inside provided array
+        //for is simple than previosu solution
+        for ($i = 0; $i < $count; $i++) {
+            if (\is_string($input[$i])) {
+                continue;
+            }
             throw new InvalidArgumentException(self::EXC_MESSAGE);
         }
 

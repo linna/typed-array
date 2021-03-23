@@ -42,11 +42,13 @@ class ClassArrayObject extends ArrayObject
             throw new InvalidArgumentException("Type <{$this->type}> provided isn't a class.");
         }
 
-        //to avoid foreach, compare sizes of array
-        //before and after apply a filter :)
-        if (\count($input) > \count(\array_filter($input, function ($e) use ($class) {
-            return $e instanceof $class;
-        }))) {
+        //get input array len
+        $count = \count($input);
+        //check for invalid values inside provided array
+        for ($i = 0; $i < $count; $i++) {
+            if ($input[$i] instanceof $class) {
+                continue;
+            }
             throw new InvalidArgumentException("Elements passed must be of the type <{$this->type}>.");
         }
 
