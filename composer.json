@@ -15,16 +15,16 @@
         "issues": "https://github.com/linna/typed-array/issues"
     },
     "require": {
-        "php": "^7.1"
+        "php": ">=7.4"
     },
     "require-dev": {
-        "infection/infection": "^0.10",
-        "phpstan/phpstan": "^0.10",
-        "phpunit/phpunit": "^7.0"
+        "infection/infection": "^0.21",
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-4": {
-            "Linna\\": "src/"
+            "Linna\\": "src/Linna"
         }
     },
     "autoload-dev": {

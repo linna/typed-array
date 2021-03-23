@@ -11,10 +11,11 @@ declare(strict_types=1);
 
 namespace Linna\Tests;
 
-use Linna\TypedArray;
 use ArrayObject;
-use SplStack;
+use InvalidArgumentException;
+use Linna\TypedArrayObject\TypedArray;
 use PHPUnit\Framework\TestCase;
+use SplStack;
 
 /**
  * Typed Array Test.
@@ -51,11 +52,10 @@ class TypedArrayTest extends TestCase
 
     /**
      * Test new instance with not allowed type.
-     *
-     * @expectedException InvalidArgumentException
      */
     public function testNewInstanceWithNotAllowedType()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->assertInstanceOf(TypedArray::class, (new TypedArray('notAllowedType')));
     }
 
@@ -163,10 +163,10 @@ class TypedArrayTest extends TestCase
      * Test new instance passing array with invalid element to constructor.
      *
      * @dataProvider wrongTypedArrayProvider
-     * @expectedException InvalidArgumentException
      */
     public function testCreateInstanceWithWrongTypedArray($type, $array)
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->assertInstanceOf(TypedArray::class, (new TypedArray($type, $array)));
     }
 
@@ -271,10 +271,11 @@ class TypedArrayTest extends TestCase
      * Test assign to array a wrong typed value.
      *
      * @dataProvider wrongTypedValueProvider
-     * @expectedException InvalidArgumentException
      */
     public function testAssignWrongTypedValueToArray($type, $value)
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $array = new TypedArray($type);
         $array[] = $value;
     }
@@ -292,11 +293,10 @@ class TypedArrayTest extends TestCase
 
     /**
      * Test new instance with not existent class.
-     *
-     * @expectedException InvalidArgumentException
      */
     public function testCreateInstanceWithNotExistentClass()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->assertInstanceOf(TypedArray::class, (new TypedArray(ArrayBadObject::class)));
     }
 
@@ -315,18 +315,17 @@ class TypedArrayTest extends TestCase
                     new ArrayObject([1.1, 2.2, 3.3]),
                     new ArrayObject(['a', 'b', 'c']),
                 ]
-            )
+                )
             )
         );
     }
 
     /**
      * Test new instance passing array with invalid element to constructor.
-     *
-     * @expectedException InvalidArgumentException
      */
     public function testCreateInstanceWithWrongObjectTypedArray()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->assertInstanceOf(
             TypedArray::class,
             (
@@ -337,7 +336,7 @@ class TypedArrayTest extends TestCase
                     new ArrayObject([1.1, 2.2, 3.3]),
                     new SplStack(),
                 ]
-            )
+                )
             )
         );
     }
@@ -355,11 +354,10 @@ class TypedArrayTest extends TestCase
 
     /**
      * Test assign to array a wrong typed value.
-     *
-     * @expectedException InvalidArgumentException
      */
     public function testAssignWrongTypedObjectValueToArray()
     {
+        $this->expectException(InvalidArgumentException::class);
         $array = new TypedArray(ArrayObject::class);
         $array[] = new SplStack();
     }
