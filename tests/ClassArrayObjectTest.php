@@ -39,7 +39,7 @@ class ClassArrayObjectTest extends TestCase
             (new ArrayObject),
             (new ArrayObject)
         ];
-        
+
         $this->assertInstanceOf(ClassArrayObject::class, (new ClassArrayObject(ArrayObject::class, $array)));
     }
 
@@ -49,28 +49,28 @@ class ClassArrayObjectTest extends TestCase
     public function testSetValueWithValidArgument(): void
     {
         $object = new ArrayObject();
-        
+
         $classArray = new ClassArrayObject(ArrayObject::class);
         $classArray[] = $object;
-        
+
         $this->assertSame(1, $this->count($classArray));
         $this->assertSame($object, $classArray[0]);
     }
-    
+
     /**
      * Test append value with valid argument.
      */
     public function testAppendValueWithValidArgument(): void
     {
         $object = new ArrayObject();
-        
+
         $classArray = new ClassArrayObject(ArrayObject::class);
         $classArray->append($object);
-        
+
         $this->assertSame(1, $this->count($classArray));
         $this->assertSame($object, $classArray[0]);
     }
-    
+
     /**
      * Provide invalid typed arrays.
      *
@@ -81,7 +81,9 @@ class ClassArrayObjectTest extends TestCase
         return [
             [[[1], [2]]], //array
             [[true, false]], //bool
-            [[function () {}, function () {}]], //callable
+            [[function () {
+            }, function () {
+            }]], //callable
             [[1.1, 2.2]], //float
             [[1, 2]], //int
             [[(object) ['name' => 'foo'], (object) ['name' => 'bar']]], //object
@@ -91,13 +93,13 @@ class ClassArrayObjectTest extends TestCase
 
     /**
      * Test new instance with invalid argument.
-     * 
+     *
      * @dataProvider invalidArrayProvider
      */
     public function testNewInstanceWithInvalidArgument(array $array): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
+
         $classArray = new ClassArrayObject(ArrayObject::class, $array);
     }
 
@@ -111,7 +113,8 @@ class ClassArrayObjectTest extends TestCase
         return [
             [[1]], //array
             [true], //bool
-            [function () {}], //callable
+            [function () {
+            }], //callable
             [1.1], //float
             [1], //int
             [(object) ['name' => 'foo']], //object
@@ -121,26 +124,26 @@ class ClassArrayObjectTest extends TestCase
 
     /**
      * Test set value with invalid argument.
-     * 
+     *
      * @dataProvider invalidValueProvider
      */
     public function testSetValueWithInvalidArgument($value): void
     {
         $this->expectException(InvalidArgumentException::class);
-     
+
         $classArray = new ClassArrayObject(ArrayObject::class);
         $classArray[] = $value;
     }
 
     /**
      * Test append value with invalid argument.
-     * 
+     *
      * @dataProvider invalidValueProvider
      */
     public function testAppendValueWithInvalidArgument($value): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
+
         $classArray = new ClassArrayObject(ArrayObject::class);
         $classArray->append($value);
     }
