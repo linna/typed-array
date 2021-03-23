@@ -33,7 +33,9 @@ class CallableArrayObjectTest extends TestCase
      */
     public function testNewInstanceWithValidArgument(): void
     {
-        $this->assertInstanceOf(CallableArrayObject::class, (new CallableArrayObject([function($e){return $e+1;}])));
+        $this->assertInstanceOf(CallableArrayObject::class, (new CallableArrayObject([function ($e) {
+            return $e+1;
+        }])));
     }
 
     /**
@@ -42,24 +44,28 @@ class CallableArrayObjectTest extends TestCase
     public function testSetValueWithValidArgument(): void
     {
         $callableArray = new CallableArrayObject();
-        $callableArray[] = function($e){return $e+1;};
-        
+        $callableArray[] = function ($e) {
+            return $e+1;
+        };
+
         $this->assertSame(1, $this->count($callableArray));
-        $this->assertSame(true, is_callable($callableArray[0]));
+        $this->assertSame(true, \is_callable($callableArray[0]));
     }
-    
+
     /**
      * Test append value with valid argument.
      */
     public function testAppendValueWithValidArgument(): void
     {
         $callableArray = new CallableArrayObject();
-        $callableArray->append(function($e){return $e+1;});
-        
+        $callableArray->append(function ($e) {
+            return $e+1;
+        });
+
         $this->assertSame(1, $this->count($callableArray));
-        $this->assertSame(true, is_callable($callableArray[0]));
+        $this->assertSame(true, \is_callable($callableArray[0]));
     }
-    
+
     /**
      * Provide invalid typed arrays.
      *
@@ -80,13 +86,13 @@ class CallableArrayObjectTest extends TestCase
 
     /**
      * Test new instance with invalid argument.
-     * 
+     *
      * @dataProvider invalidArrayProvider
      */
     public function testNewInstanceWithInvalidArgument(array $array): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
+
         $callableArray = new CallableArrayObject($array);
     }
 
@@ -110,26 +116,26 @@ class CallableArrayObjectTest extends TestCase
 
     /**
      * Test set value with invalid argument.
-     * 
+     *
      * @dataProvider invalidValueProvider
      */
     public function testSetValueWithInvalidArgument($value): void
     {
         $this->expectException(InvalidArgumentException::class);
-     
+
         $callableArray = new CallableArrayObject();
         $callableArray[] = $value;
     }
 
     /**
      * Test append value with invalid argument.
-     * 
+     *
      * @dataProvider invalidValueProvider
      */
     public function testAppendValueWithInvalidArgument($value): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
+
         $callableArray = new CallableArrayObject();
         $callableArray->append($value);
     }

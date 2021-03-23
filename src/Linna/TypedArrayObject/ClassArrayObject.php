@@ -37,7 +37,7 @@ class ClassArrayObject extends ArrayObject
     public function __construct(string $class, array $input = [], int $flags = 0, string $iterator_class = "ArrayIterator")
     {
         $this->type = $class;
-        
+
         if (!\class_exists($class)) {
             throw new InvalidArgumentException("Type <{$this->type}> provided isn't a class.");
         }

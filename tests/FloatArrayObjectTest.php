@@ -43,11 +43,11 @@ class FloatArrayObjectTest extends TestCase
     {
         $floatArray = new FloatArrayObject();
         $floatArray[] = 1.1;
-        
+
         $this->assertSame(1, $this->count($floatArray));
         $this->assertSame(1.1, $floatArray[0]);
     }
-    
+
     /**
      * Test append value with valid argument.
      */
@@ -55,11 +55,11 @@ class FloatArrayObjectTest extends TestCase
     {
         $floatArray = new FloatArrayObject();
         $floatArray->append(1.1);
-        
+
         $this->assertSame(1, $this->count($floatArray));
         $this->assertSame(1.1, $floatArray[0]);
     }
-    
+
     /**
      * Provide invalid typed arrays.
      *
@@ -70,7 +70,9 @@ class FloatArrayObjectTest extends TestCase
         return [
             [[[1], [2]]], //array
             [[true, false]], //bool
-            [[function () {}, function () {}]], //callable
+            [[function () {
+            }, function () {
+            }]], //callable
             //[[1.1, 2.2]], //float
             [[1, 2]], //int
             [[(object) ['name' => 'foo'], (object) ['name' => 'bar']]], //object
@@ -80,13 +82,13 @@ class FloatArrayObjectTest extends TestCase
 
     /**
      * Test new instance with invalid argument.
-     * 
+     *
      * @dataProvider invalidArrayProvider
      */
     public function testNewInstanceWithInvalidArgument(array $array): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
+
         $floatArray = new FloatArrayObject($array);
     }
 
@@ -100,7 +102,8 @@ class FloatArrayObjectTest extends TestCase
         return [
             [[1]], //array
             [true], //bool
-            [function () {}], //callable
+            [function () {
+            }], //callable
             //[1.1], //float
             [1], //int
             [(object) ['name' => 'foo']], //object
@@ -110,26 +113,26 @@ class FloatArrayObjectTest extends TestCase
 
     /**
      * Test set value with invalid argument.
-     * 
+     *
      * @dataProvider invalidValueProvider
      */
     public function testSetValueWithInvalidArgument($value): void
     {
         $this->expectException(InvalidArgumentException::class);
-     
+
         $floatArray = new FloatArrayObject();
         $floatArray[] = $value;
     }
 
     /**
      * Test append value with invalid argument.
-     * 
+     *
      * @dataProvider invalidValueProvider
      */
     public function testAppendValueWithInvalidArgument($value): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
+
         $floatArray = new FloatArrayObject();
         $floatArray->append($value);
     }
