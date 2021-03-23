@@ -94,7 +94,7 @@ class TypedArray extends ArrayObject
             throw new InvalidArgumentException(__CLASS__.': '.$type.' type passed to '.__METHOD__.' not supported.');
         }
 
-        //for not utilize foreach, compare sizes of array
+        //to avoid foreach, compare sizes of array
         //before and after apply a filter :)
         if (\count($array) > \count(\array_filter($array, $this->allowedTypes[$type]))) {
             throw new InvalidArgumentException(__CLASS__.': Elements passed to '.__METHOD__.' must be of the type '.$type.'.');

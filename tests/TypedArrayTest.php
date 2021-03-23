@@ -315,7 +315,7 @@ class TypedArrayTest extends TestCase
                     new ArrayObject([1.1, 2.2, 3.3]),
                     new ArrayObject(['a', 'b', 'c']),
                 ]
-            )
+                )
             )
         );
     }
@@ -337,7 +337,7 @@ class TypedArrayTest extends TestCase
                     new ArrayObject([1.1, 2.2, 3.3]),
                     new SplStack(),
                 ]
-            )
+                )
             )
         );
     }

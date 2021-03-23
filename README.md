@@ -12,7 +12,7 @@
 
 <div align="center">
 
-[![Build Status](https://travis-ci.org/linna/typed-array.svg?branch=master)](https://travis-ci.org/linna/typed-array)
+[![Tests](https://github.com/linna/typed-array/actions/workflows/tests.yml/badge.svg)](https://github.com/linna/typed-array/actions/workflows/tests.yml)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/linna/typed-array/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/linna/typed-array/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/linna/typed-array/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/linna/typed-array/?branch=master)
 [![StyleCI](https://styleci.io/repos/93407083/shield?branch=master&style=flat)](https://styleci.io/repos/93407083)
@@ -23,7 +23,7 @@
 This package provide typed arrays for php as extension of native [ArrayObject](http://php.net/manual/en/class.arrayobject.php).  
 
 ## Requirements
-This package require php 7.1
+This package require php >= 7.1 and < 8.0
 
 ## Installation
 With composer:
