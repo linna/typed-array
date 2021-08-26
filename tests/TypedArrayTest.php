@@ -199,7 +199,7 @@ class TypedArrayTest extends TestCase
         $array = new TypedArray($type);
         $array[] = $value;
 
-        $this->assertEquals(1, $array->count());
+        $this->assertSame(1, $array->count());
     }
 
     /**
@@ -349,7 +349,7 @@ class TypedArrayTest extends TestCase
         $array = new TypedArray(ArrayObject::class);
         $array[] = new ArrayObject([1, 2, 3]);
 
-        $this->assertEquals(1, $array->count());
+        $this->assertSame(1, $array->count());
     }
 
     /**
