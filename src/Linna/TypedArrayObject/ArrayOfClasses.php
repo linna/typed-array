@@ -17,40 +17,40 @@ use InvalidArgumentException;
 /**
  * Provide a way for create an array of typed elements with php.
  */
-class ClassArrayObject extends ArrayObject
+class ArrayOfClasses extends ArrayObject
 {
     /**
      * @var string Current type for array
      */
-    protected $type = '';
+    protected string $class;
+    protected string $exceptionMessage;
+
 
     /**
      * Class Contructor.
      *
-     * @param array  $input
-     * @param int    $flags
-     * @param string $iterator_class
+     * @param array<object> $input
+     * @param int           $flags
+     * @param string        $iterator_class
      *
      * @throws InvalidArgumentException If elements in the optional array parameter
      *                                  aren't of the configured type.
      */
     public function __construct(string $class, array $input = [], int $flags = 0, string $iterator_class = "ArrayIterator")
     {
-        $this->type = $class;
-        
+        $this->class = $class;
+        $this->exceptionMessage = "Elements passed must be of the type <{$class}>.";
+
         if (!\class_exists($class)) {
-            throw new InvalidArgumentException("Type <{$this->type}> provided isn't a class.");
+            throw new InvalidArgumentException("Type <{$this->class}> provided isn't a class.");
         }
 
-        //to avoid foreach, compare sizes of array
-        //before and after apply a filter :)
-        if (\count($input) > \count(\array_filter($input, function ($e) use ($class) {
-            return $e instanceof $class;
-        }))) {
-            throw new InvalidArgumentException("Elements passed must be of the type <{$this->type}>.");
+        if (!\array_product(\array_map(function ($x) use ($class) {
+            return $x instanceof $class;
+        }, $input))) {
+            throw new InvalidArgumentException($this->exceptionMessage);
         }
 
-        //call parent constructor
         parent::__construct($input, $flags, $iterator_class);
     }
 
@@ -68,31 +68,28 @@ class ClassArrayObject extends ArrayObject
      */
     public function offsetSet($index, $newval): void
     {
-        if ($newval instanceof $this->type) {
-            parent::offsetSet($index, $newval);
-
-            return;
+        if (!($newval instanceof $this->class)) {
+            throw new InvalidArgumentException($this->exceptionMessage);
         }
 
-        throw new InvalidArgumentException("Elements passed must be of the type <{$this->type}>.");
+        parent::offsetSet($index, $newval);
     }
 
     /**
      * Append a value at the end of the array.
      *
      * @param object $value
+     *
      * @return void
      *
      * @throws InvalidArgumentException  If value passed with $value are not of the expected type
      */
     public function append($value): void
     {
-        if ($value instanceof $this->type) {
-            parent::append($value);
-
-            return;
+        if (!($value instanceof $this->class)) {
+            throw new InvalidArgumentException($this->exceptionMessage);
         }
 
-        throw new InvalidArgumentException("Elements passed must be of the type <{$this->type}>.");
+        parent::append($value);
     }
 }

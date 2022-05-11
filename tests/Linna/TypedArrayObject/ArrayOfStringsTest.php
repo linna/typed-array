@@ -9,24 +9,22 @@
  */
 declare(strict_types=1);
 
-namespace Linna\Tests;
+namespace Linna\TypedArrayObject;
 
-use ArrayObject;
 use InvalidArgumentException;
-use Linna\TypedArrayObject\ClassArrayObject;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Int Array Object Test.
+ * String Array Object Test.
  */
-class ClassArrayObjectTest extends TestCase
+class ArrayOfStringsTest extends TestCase
 {
     /**
      * Test new instance.
      */
     public function testNewInstance(): void
     {
-        $this->assertInstanceOf(ClassArrayObject::class, (new ClassArrayObject(ArrayObject::class)));
+        $this->assertInstanceOf(ArrayOfStrings::class, (new ArrayOfStrings()));
     }
 
     /**
@@ -34,13 +32,7 @@ class ClassArrayObjectTest extends TestCase
      */
     public function testNewInstanceWithValidArgument(): void
     {
-        $array = [
-            (new ArrayObject),
-            (new ArrayObject),
-            (new ArrayObject)
-        ];
-        
-        $this->assertInstanceOf(ClassArrayObject::class, (new ClassArrayObject(ArrayObject::class, $array)));
+        $this->assertInstanceOf(ArrayOfStrings::class, (new ArrayOfStrings(['a','b','c','d','e','f','g','h','i'])));
     }
 
     /**
@@ -48,29 +40,25 @@ class ClassArrayObjectTest extends TestCase
      */
     public function testSetValueWithValidArgument(): void
     {
-        $object = new ArrayObject();
-        
-        $classArray = new ClassArrayObject(ArrayObject::class);
-        $classArray[] = $object;
-        
-        $this->assertSame(1, $this->count($classArray));
-        $this->assertSame($object, $classArray[0]);
+        $stringArray = new ArrayOfStrings();
+        $stringArray[] = 'a';
+
+        $this->assertSame(1, $this->count($stringArray));
+        $this->assertSame('a', $stringArray[0]);
     }
-    
+
     /**
      * Test append value with valid argument.
      */
     public function testAppendValueWithValidArgument(): void
     {
-        $object = new ArrayObject();
-        
-        $classArray = new ClassArrayObject(ArrayObject::class);
-        $classArray->append($object);
-        
-        $this->assertSame(1, $this->count($classArray));
-        $this->assertSame($object, $classArray[0]);
+        $stringArray = new ArrayOfStrings();
+        $stringArray->append('a');
+
+        $this->assertSame(1, $this->count($stringArray));
+        $this->assertSame('a', $stringArray[0]);
     }
-    
+
     /**
      * Provide invalid typed arrays.
      *
@@ -81,24 +69,25 @@ class ClassArrayObjectTest extends TestCase
         return [
             [[[1], [2]]], //array
             [[true, false]], //bool
-            [[function () {}, function () {}]], //callable
+            [[function () {
+            }, function () {
+            }]], //callable
             [[1.1, 2.2]], //float
             [[1, 2]], //int
             [[(object) ['name' => 'foo'], (object) ['name' => 'bar']]], //object
-            [['a', 'b']], //string
         ];
     }
 
     /**
      * Test new instance with invalid argument.
-     * 
+     *
      * @dataProvider invalidArrayProvider
      */
     public function testNewInstanceWithInvalidArgument(array $array): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
-        $classArray = new ClassArrayObject(ArrayObject::class, $array);
+
+        (new ArrayOfStrings($array));
     }
 
     /**
@@ -111,37 +100,36 @@ class ClassArrayObjectTest extends TestCase
         return [
             [[1]], //array
             [true], //bool
-            [function () {}], //callable
+            [function () {
+            }], //callable
             [1.1], //float
             [1], //int
             [(object) ['name' => 'foo']], //object
-            ['a'], //string
         ];
     }
 
     /**
      * Test set value with invalid argument.
-     * 
+     *
      * @dataProvider invalidValueProvider
      */
     public function testSetValueWithInvalidArgument($value): void
     {
         $this->expectException(InvalidArgumentException::class);
-     
-        $classArray = new ClassArrayObject(ArrayObject::class);
-        $classArray[] = $value;
+
+        $stringArray = new ArrayOfStrings();
+        $stringArray[] = $value;
     }
 
     /**
      * Test append value with invalid argument.
-     * 
+     *
      * @dataProvider invalidValueProvider
      */
     public function testAppendValueWithInvalidArgument($value): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
-        $classArray = new ClassArrayObject(ArrayObject::class);
-        $classArray->append($value);
+
+        (new ArrayOfStrings())->append($value);
     }
 }

@@ -9,23 +9,22 @@
  */
 declare(strict_types=1);
 
-namespace Linna\Tests;
+namespace Linna\TypedArrayObject;
 
 use InvalidArgumentException;
-use Linna\TypedArrayObject\BoolArrayObject;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Bool Array Object Test.
+ * Int Array Object Test.
  */
-class BoolArrayObjectTest extends TestCase
+class ArrayOfIntegersTest extends TestCase
 {
     /**
      * Test new instance.
      */
     public function testNewInstance(): void
     {
-        $this->assertInstanceOf(BoolArrayObject::class, (new BoolArrayObject()));
+        $this->assertInstanceOf(ArrayOfIntegers::class, (new ArrayOfIntegers()));
     }
 
     /**
@@ -33,7 +32,7 @@ class BoolArrayObjectTest extends TestCase
      */
     public function testNewInstanceWithValidArgument(): void
     {
-        $this->assertInstanceOf(BoolArrayObject::class, (new BoolArrayObject([true,true,true,false])));
+        $this->assertInstanceOf(ArrayOfIntegers::class, (new ArrayOfIntegers([1,2,3,4,5,6,7,8,9,0])));
     }
 
     /**
@@ -41,25 +40,25 @@ class BoolArrayObjectTest extends TestCase
      */
     public function testSetValueWithValidArgument(): void
     {
-        $boolArray = new BoolArrayObject();
-        $boolArray[] = false;
-        
-        $this->assertSame(1, $this->count($boolArray));
-        $this->assertSame(false, $boolArray[0]);
+        $intArray = new ArrayOfIntegers();
+        $intArray[] = 1;
+
+        $this->assertSame(1, $this->count($intArray));
+        $this->assertSame(1, $intArray[0]);
     }
-    
+
     /**
      * Test append value with valid argument.
      */
     public function testAppendValueWithValidArgument(): void
     {
-        $boolArray = new BoolArrayObject();
-        $boolArray->append(false);
-        
-        $this->assertSame(1, $this->count($boolArray));
-        $this->assertSame(false, $boolArray[0]);
+        $intArray = new ArrayOfIntegers();
+        $intArray->append(1);
+
+        $this->assertSame(1, $this->count($intArray));
+        $this->assertSame(1, $intArray[0]);
     }
-    
+
     /**
      * Provide invalid typed arrays.
      *
@@ -69,10 +68,11 @@ class BoolArrayObjectTest extends TestCase
     {
         return [
             [[[1], [2]]], //array
-            //[[true, false]], //bool
-            [[function () {}, function () {}]], //callable
+            [[true, false]], //bool
+            [[function () {
+            }, function () {
+            }]], //callable
             [[1.1, 2.2]], //float
-            [[1, 2]], //int
             [[(object) ['name' => 'foo'], (object) ['name' => 'bar']]], //object
             [['a', 'b']], //string
         ];
@@ -80,14 +80,14 @@ class BoolArrayObjectTest extends TestCase
 
     /**
      * Test new instance with invalid argument.
-     * 
+     *
      * @dataProvider invalidArrayProvider
      */
     public function testNewInstanceWithInvalidArgument(array $array): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
-        $boolArray = new BoolArrayObject($array);
+
+        (new ArrayOfIntegers($array));
     }
 
     /**
@@ -99,10 +99,10 @@ class BoolArrayObjectTest extends TestCase
     {
         return [
             [[1]], //array
-            //[true], //bool
-            [function () {}], //callable
+            [true], //bool
+            [function () {
+            }], //callable
             [1.1], //float
-            [1], //int
             [(object) ['name' => 'foo']], //object
             ['a'], //string
         ];
@@ -110,27 +110,26 @@ class BoolArrayObjectTest extends TestCase
 
     /**
      * Test set value with invalid argument.
-     * 
+     *
      * @dataProvider invalidValueProvider
      */
     public function testSetValueWithInvalidArgument($value): void
     {
         $this->expectException(InvalidArgumentException::class);
-     
-        $boolArray = new BoolArrayObject();
-        $boolArray[] = $value;
+
+        $intArray = new ArrayOfIntegers();
+        $intArray[] = $value;
     }
 
     /**
      * Test append value with invalid argument.
-     * 
+     *
      * @dataProvider invalidValueProvider
      */
     public function testAppendValueWithInvalidArgument($value): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
-        $boolArray = new BoolArrayObject();
-        $boolArray->append($value);
+
+        (new ArrayOfIntegers())->append($value);
     }
 }

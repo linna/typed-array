@@ -9,23 +9,22 @@
  */
 declare(strict_types=1);
 
-namespace Linna\Tests;
+namespace Linna\TypedArrayObject;
 
 use InvalidArgumentException;
-use Linna\TypedArrayObject\CallableArrayObject;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Callable Array Object Test.
  */
-class CallableArrayObjectTest extends TestCase
+class ArrayOfCallableTest extends TestCase
 {
     /**
      * Test new instance.
      */
     public function testNewInstance(): void
     {
-        $this->assertInstanceOf(CallableArrayObject::class, (new CallableArrayObject()));
+        $this->assertInstanceOf(ArrayOfCallable::class, (new ArrayOfCallable()));
     }
 
     /**
@@ -33,7 +32,9 @@ class CallableArrayObjectTest extends TestCase
      */
     public function testNewInstanceWithValidArgument(): void
     {
-        $this->assertInstanceOf(CallableArrayObject::class, (new CallableArrayObject([function($e){return $e+1;}])));
+        $this->assertInstanceOf(ArrayOfCallable::class, (new ArrayOfCallable([function ($e) {
+            return $e+1;
+        }])));
     }
 
     /**
@@ -41,25 +42,29 @@ class CallableArrayObjectTest extends TestCase
      */
     public function testSetValueWithValidArgument(): void
     {
-        $callableArray = new CallableArrayObject();
-        $callableArray[] = function($e){return $e+1;};
-        
+        $callableArray = new ArrayOfCallable();
+        $callableArray[] = function ($e) {
+            return $e+1;
+        };
+
         $this->assertSame(1, $this->count($callableArray));
-        $this->assertSame(true, is_callable($callableArray[0]));
+        $this->assertSame(true, \is_callable($callableArray[0]));
     }
-    
+
     /**
      * Test append value with valid argument.
      */
     public function testAppendValueWithValidArgument(): void
     {
-        $callableArray = new CallableArrayObject();
-        $callableArray->append(function($e){return $e+1;});
-        
+        $callableArray = new ArrayOfCallable();
+        $callableArray->append(function ($e) {
+            return $e+1;
+        });
+
         $this->assertSame(1, $this->count($callableArray));
-        $this->assertSame(true, is_callable($callableArray[0]));
+        $this->assertSame(true, \is_callable($callableArray[0]));
     }
-    
+
     /**
      * Provide invalid typed arrays.
      *
@@ -70,7 +75,6 @@ class CallableArrayObjectTest extends TestCase
         return [
             [[[1], [2]]], //array
             [[true, false]], //bool
-            //[[function () {}, function () {}]], //callable
             [[1.1, 2.2]], //float
             [[1, 2]], //int
             [[(object) ['name' => 'foo'], (object) ['name' => 'bar']]], //object
@@ -80,14 +84,14 @@ class CallableArrayObjectTest extends TestCase
 
     /**
      * Test new instance with invalid argument.
-     * 
+     *
      * @dataProvider invalidArrayProvider
      */
     public function testNewInstanceWithInvalidArgument(array $array): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
-        $callableArray = new CallableArrayObject($array);
+
+        (new ArrayOfCallable($array));
     }
 
     /**
@@ -100,7 +104,6 @@ class CallableArrayObjectTest extends TestCase
         return [
             [[1]], //array
             [true], //bool
-            //[function () {}], //callable
             [1.1], //float
             [1], //int
             [(object) ['name' => 'foo']], //object
@@ -110,27 +113,26 @@ class CallableArrayObjectTest extends TestCase
 
     /**
      * Test set value with invalid argument.
-     * 
+     *
      * @dataProvider invalidValueProvider
      */
     public function testSetValueWithInvalidArgument($value): void
     {
         $this->expectException(InvalidArgumentException::class);
-     
-        $callableArray = new CallableArrayObject();
+
+        $callableArray = new ArrayOfCallable();
         $callableArray[] = $value;
     }
 
     /**
      * Test append value with invalid argument.
-     * 
+     *
      * @dataProvider invalidValueProvider
      */
     public function testAppendValueWithInvalidArgument($value): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
-        $callableArray = new CallableArrayObject();
-        $callableArray->append($value);
+
+        (new ArrayOfCallable())->append($value);
     }
 }

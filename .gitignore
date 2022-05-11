@@ -3,4 +3,5 @@ composer.lock
 clover.xml
 infection-log.txt
 vendor/
+.php-cs-fixer.cache
 .phpunit.result.cache

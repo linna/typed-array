@@ -15,7 +15,7 @@
         "issues": "https://github.com/linna/typed-array/issues"
     },
     "require": {
-        "php": ">=7.4"
+        "php": ">=8.0"
     },
     "require-dev": {
         "infection/infection": "^0.21",
@@ -29,7 +29,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Linna\\Tests\\": "tests/"
+            "Linna\\": "tests/Linna"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true
         }
     }
 }

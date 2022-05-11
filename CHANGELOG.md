@@ -6,14 +6,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [v2.0.1](https://github.com/linna/typed-array/compare/v2.0.0...v2.0.1) - 2019-03-XX
+## [v3.0.0](https://github.com/linna/typed-array/compare/v2.0.1...v3.0.0) - 2022-05-11
+
+### Added
+- php 8.0 support
+- `ArrayOfArrays` class
+- `ArrayOfBooleans` class
+- `ArrayOfCallable` class
+- `ArrayOfClasses` class
+- `ArrayOfFloats` class
+- `ArrayOfIntegers` class
+- `ArrayOfObjects` class
+- `ArrayOfStrings` class
+
+### Changed
+- namespace from `Linna` to `Linna\TypedArrayObject`
+- type chek is performed als on method `ArrayObject->append()`
+
+### removed
+- `Linna\TypedArray` class
+
+## [v2.0.1](https://github.com/linna/typed-array/compare/v2.0.0...v2.0.1) - 2020-03-23
 
 ### Added
 - php 7.3 support
+- php 7.4 support
 
 ### Changed
 - `.scrutinizer.yml` updated for use phpunit from `vendor` directory
 - Merge pull request #14 from peter279k/enhance_stuffs with code enhancements
+
+### Removed
+- Travis CI usage for test build.
 
 ## [v2.0.0](https://github.com/linna/typed-array/compare/v1.0.5...v2.0.0) - 2018-08-13
 
