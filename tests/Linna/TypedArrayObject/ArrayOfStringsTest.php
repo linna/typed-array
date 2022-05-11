@@ -9,23 +9,22 @@
  */
 declare(strict_types=1);
 
-namespace Linna\Tests;
+namespace Linna\TypedArrayObject;
 
 use InvalidArgumentException;
-use Linna\TypedArrayObject\StringArrayObject;
 use PHPUnit\Framework\TestCase;
 
 /**
  * String Array Object Test.
  */
-class StringArrayObjectTest extends TestCase
+class ArrayOfStringsTest extends TestCase
 {
     /**
      * Test new instance.
      */
     public function testNewInstance(): void
     {
-        $this->assertInstanceOf(StringArrayObject::class, (new StringArrayObject()));
+        $this->assertInstanceOf(ArrayOfStrings::class, (new ArrayOfStrings()));
     }
 
     /**
@@ -33,7 +32,7 @@ class StringArrayObjectTest extends TestCase
      */
     public function testNewInstanceWithValidArgument(): void
     {
-        $this->assertInstanceOf(StringArrayObject::class, (new StringArrayObject(['a','b','c','d','e','f','g','h','i'])));
+        $this->assertInstanceOf(ArrayOfStrings::class, (new ArrayOfStrings(['a','b','c','d','e','f','g','h','i'])));
     }
 
     /**
@@ -41,7 +40,7 @@ class StringArrayObjectTest extends TestCase
      */
     public function testSetValueWithValidArgument(): void
     {
-        $stringArray = new StringArrayObject();
+        $stringArray = new ArrayOfStrings();
         $stringArray[] = 'a';
 
         $this->assertSame(1, $this->count($stringArray));
@@ -53,7 +52,7 @@ class StringArrayObjectTest extends TestCase
      */
     public function testAppendValueWithValidArgument(): void
     {
-        $stringArray = new StringArrayObject();
+        $stringArray = new ArrayOfStrings();
         $stringArray->append('a');
 
         $this->assertSame(1, $this->count($stringArray));
@@ -76,7 +75,6 @@ class StringArrayObjectTest extends TestCase
             [[1.1, 2.2]], //float
             [[1, 2]], //int
             [[(object) ['name' => 'foo'], (object) ['name' => 'bar']]], //object
-            //[['a', 'b']], //string
         ];
     }
 
@@ -89,7 +87,7 @@ class StringArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $stringArray = new StringArrayObject($array);
+        (new ArrayOfStrings($array));
     }
 
     /**
@@ -107,7 +105,6 @@ class StringArrayObjectTest extends TestCase
             [1.1], //float
             [1], //int
             [(object) ['name' => 'foo']], //object
-            //['a'], //string
         ];
     }
 
@@ -120,7 +117,7 @@ class StringArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $stringArray = new StringArrayObject();
+        $stringArray = new ArrayOfStrings();
         $stringArray[] = $value;
     }
 
@@ -133,7 +130,6 @@ class StringArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $stringArray = new StringArrayObject();
-        $stringArray->append($value);
+        (new ArrayOfStrings())->append($value);
     }
 }

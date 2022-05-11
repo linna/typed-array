@@ -9,23 +9,22 @@
  */
 declare(strict_types=1);
 
-namespace Linna\Tests;
+namespace Linna\TypedArrayObject;
 
 use InvalidArgumentException;
-use Linna\TypedArrayObject\CallableArrayObject;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Callable Array Object Test.
+ * Int Array Object Test.
  */
-class CallableArrayObjectTest extends TestCase
+class ArrayOfIntegersTest extends TestCase
 {
     /**
      * Test new instance.
      */
     public function testNewInstance(): void
     {
-        $this->assertInstanceOf(CallableArrayObject::class, (new CallableArrayObject()));
+        $this->assertInstanceOf(ArrayOfIntegers::class, (new ArrayOfIntegers()));
     }
 
     /**
@@ -33,9 +32,7 @@ class CallableArrayObjectTest extends TestCase
      */
     public function testNewInstanceWithValidArgument(): void
     {
-        $this->assertInstanceOf(CallableArrayObject::class, (new CallableArrayObject([function ($e) {
-            return $e+1;
-        }])));
+        $this->assertInstanceOf(ArrayOfIntegers::class, (new ArrayOfIntegers([1,2,3,4,5,6,7,8,9,0])));
     }
 
     /**
@@ -43,13 +40,11 @@ class CallableArrayObjectTest extends TestCase
      */
     public function testSetValueWithValidArgument(): void
     {
-        $callableArray = new CallableArrayObject();
-        $callableArray[] = function ($e) {
-            return $e+1;
-        };
+        $intArray = new ArrayOfIntegers();
+        $intArray[] = 1;
 
-        $this->assertSame(1, $this->count($callableArray));
-        $this->assertSame(true, \is_callable($callableArray[0]));
+        $this->assertSame(1, $this->count($intArray));
+        $this->assertSame(1, $intArray[0]);
     }
 
     /**
@@ -57,13 +52,11 @@ class CallableArrayObjectTest extends TestCase
      */
     public function testAppendValueWithValidArgument(): void
     {
-        $callableArray = new CallableArrayObject();
-        $callableArray->append(function ($e) {
-            return $e+1;
-        });
+        $intArray = new ArrayOfIntegers();
+        $intArray->append(1);
 
-        $this->assertSame(1, $this->count($callableArray));
-        $this->assertSame(true, \is_callable($callableArray[0]));
+        $this->assertSame(1, $this->count($intArray));
+        $this->assertSame(1, $intArray[0]);
     }
 
     /**
@@ -76,9 +69,10 @@ class CallableArrayObjectTest extends TestCase
         return [
             [[[1], [2]]], //array
             [[true, false]], //bool
-            //[[function () {}, function () {}]], //callable
+            [[function () {
+            }, function () {
+            }]], //callable
             [[1.1, 2.2]], //float
-            [[1, 2]], //int
             [[(object) ['name' => 'foo'], (object) ['name' => 'bar']]], //object
             [['a', 'b']], //string
         ];
@@ -93,7 +87,7 @@ class CallableArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $callableArray = new CallableArrayObject($array);
+        (new ArrayOfIntegers($array));
     }
 
     /**
@@ -106,9 +100,9 @@ class CallableArrayObjectTest extends TestCase
         return [
             [[1]], //array
             [true], //bool
-            //[function () {}], //callable
+            [function () {
+            }], //callable
             [1.1], //float
-            [1], //int
             [(object) ['name' => 'foo']], //object
             ['a'], //string
         ];
@@ -123,8 +117,8 @@ class CallableArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $callableArray = new CallableArrayObject();
-        $callableArray[] = $value;
+        $intArray = new ArrayOfIntegers();
+        $intArray[] = $value;
     }
 
     /**
@@ -136,7 +130,6 @@ class CallableArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $callableArray = new CallableArrayObject();
-        $callableArray->append($value);
+        (new ArrayOfIntegers())->append($value);
     }
 }

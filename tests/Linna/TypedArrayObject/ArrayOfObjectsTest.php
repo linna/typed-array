@@ -9,23 +9,22 @@
  */
 declare(strict_types=1);
 
-namespace Linna\Tests;
+namespace Linna\TypedArrayObject;
 
 use InvalidArgumentException;
-use Linna\TypedArrayObject\ArrayArrayObject;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Array Array Object Test.
+ * Int Array Object Test.
  */
-class ArrayArrayObjectTest extends TestCase
+class ArrayOfObjectsTest extends TestCase
 {
     /**
      * Test new instance.
      */
     public function testNewInstance(): void
     {
-        $this->assertInstanceOf(ArrayArrayObject::class, (new ArrayArrayObject()));
+        $this->assertInstanceOf(ArrayOfObjects::class, (new ArrayOfObjects()));
     }
 
     /**
@@ -33,7 +32,7 @@ class ArrayArrayObjectTest extends TestCase
      */
     public function testNewInstanceWithValidArgument(): void
     {
-        $this->assertInstanceOf(ArrayArrayObject::class, (new ArrayArrayObject([[1,2,3],[4,5,6],[7,8,9]])));
+        $this->assertInstanceOf(ArrayOfObjects::class, (new ArrayOfObjects([(object)["name" => "test"]])));
     }
 
     /**
@@ -41,11 +40,13 @@ class ArrayArrayObjectTest extends TestCase
      */
     public function testSetValueWithValidArgument(): void
     {
-        $arrayArray = new ArrayArrayObject();
-        $arrayArray[] = [1,2,3];
+        $object = (object) ["foo" => 1, "bar" => 2,"baz" => 3];
 
-        $this->assertSame(1, $this->count($arrayArray));
-        $this->assertSame([1,2,3], $arrayArray[0]);
+        $objectArray = new ArrayOfObjects();
+        $objectArray[] = $object;
+
+        $this->assertSame(1, $this->count($objectArray));
+        $this->assertSame($object, $objectArray[0]);
     }
 
     /**
@@ -53,11 +54,13 @@ class ArrayArrayObjectTest extends TestCase
      */
     public function testAppendValueWithValidArgument(): void
     {
-        $arrayArray = new ArrayArrayObject();
-        $arrayArray->append([1,2,3]);
+        $object = (object) ["foo" => 1, "bar" => 2,"baz" => 3];
 
-        $this->assertSame(1, $this->count($arrayArray));
-        $this->assertSame([1,2,3], $arrayArray[0]);
+        $objectArray = new ArrayOfObjects();
+        $objectArray->append($object);
+
+        $this->assertSame(1, $this->count($objectArray));
+        $this->assertSame($object, $objectArray[0]);
     }
 
     /**
@@ -68,14 +71,10 @@ class ArrayArrayObjectTest extends TestCase
     public function invalidArrayProvider(): array
     {
         return [
-            //[[[1], [2]]], //array
+            [[[1], [2]]], //array
             [[true, false]], //bool
-            [[function () {
-            }, function () {
-            }]], //callable
             [[1.1, 2.2]], //float
             [[1, 2]], //int
-            [[(object) ['name' => 'foo'], (object) ['name' => 'bar']]], //object
             [['a', 'b']], //string
         ];
     }
@@ -89,7 +88,7 @@ class ArrayArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $arrayArray = new ArrayArrayObject($array);
+        (new ArrayOfObjects($array));
     }
 
     /**
@@ -100,13 +99,10 @@ class ArrayArrayObjectTest extends TestCase
     public function invalidValueProvider(): array
     {
         return [
-            //[[1]], //array
+            [[1]], //array
             [true], //bool
-            [function () {
-            }], //callable
             [1.1], //float
             [1], //int
-            [(object) ['name' => 'foo']], //object
             ['a'], //string
         ];
     }
@@ -120,8 +116,8 @@ class ArrayArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $arrayArray = new ArrayArrayObject();
-        $arrayArray[] = $value;
+        $objectArray = new ArrayOfObjects();
+        $objectArray[] = $value;
     }
 
     /**
@@ -133,7 +129,6 @@ class ArrayArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $arrayArray = new ArrayArrayObject();
-        $arrayArray->append($value);
+        (new ArrayOfObjects())->append($value);
     }
 }

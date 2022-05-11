@@ -35,23 +35,23 @@ composer require linna/typed-array
 
 | Name                  | Native Type Handled | Description                                          |
 |-----------------------|---------------------|------------------------------------------------------|
-| `ArrayArrayObject`    | array               |                                                      |
-| `BoolArrayObject`     | bool                |                                                      |
-| `CallableArrayObject` | callable            |                                                      |
-| `ClassArrayObject`    | any existing class  | passed as first argument in constructor as `::class` |
-| `FloatArrayObject`    | float               |                                                      |
-| `IntArrayObject`      | int                 |                                                      |
-| `ObjectArrayObject`   | object              |                                                      |
-| `StringArrayObject`   | string              |                                                      |
+| `ArrayOfArrays`       | array               |                                                      |
+| `ArrayOfBooleans`     | bool                |                                                      |
+| `ArrayOfCallable`     | callable            |                                                      |
+| `ArrayOfClasses`      | any existing class  | passed as first argument in constructor as `::class` |
+| `ArrayOfFloats`       | float               |                                                      |
+| `ArrayOfIntegers`     | int                 |                                                      |
+| `ArrayOfObjects`      | object              |                                                      |
+| `ArrayOfStrings`      | string              |                                                      |
 
 
 ## Usage
 ```php
-use Linna\TypedArrayObject\IntArrayObject;
-use Linna\TypedArrayObject\ClassArrayObject;
+use Linna\TypedArrayObject\ArrayOfIntegers;
+use Linna\TypedArrayObject\ArrayOfClasses;
 
 //correct, only int passed to constructor.
-$intArray = new IntArrayObject([1, 2, 3, 4]);
+$intArray = new ArrayOfIntegers([1, 2, 3, 4]);
 
 //correct, int assigned
 $intArray[] = 5;
@@ -64,10 +64,10 @@ $intArray->append(5);
 $intArray->append('a');
 
 //throw InvalidArgumentException, mixed array passed to constructor.
-$otherIntArray = new IntArrayObject([1, 'a', 3, 4]);
+$otherIntArray = new ArrayOfIntegers([1, 'a', 3, 4]);
 
 //correct, only Foo class instances passed to constructor.
-$fooArray = new ClassArrayObject(Foo::class, [
+$fooArray = new ArrayOfClasses(Foo::class, [
     new Foo(),
     new Foo()
 ]);
@@ -83,7 +83,7 @@ $fooArray->append(new Foo());
 $fooArray->append(new Bar());
 
 //throw InvalidArgumentException, mixed array of instances passed to constructor.
-$otherFooArray = new ClassArrayObject(Foo::class, [
+$otherFooArray = new ArrayOfClasses(Foo::class, [
     new Foo(),
     new Bar()
 ]);
@@ -92,7 +92,7 @@ $otherFooArray = new ClassArrayObject(Foo::class, [
 > **Note:** Allowed types are: *array*, *bool*, *callable*, *float*, *int*, *object*, *string* and all existing classes.
 
 ## Performance consideration for v3.0
-Compared to previous versions of the library, this version is a bit faster because every types has it own class.
+Compared to previous versions of the library, this version is a bit faster because every types has it own class. Do milliseconds really matters?
 
 ![Array Speed Test](array-speed-test-v3.png)
 

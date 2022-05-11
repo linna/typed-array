@@ -17,32 +17,32 @@ use InvalidArgumentException;
 /**
  * Provide a way to create an array of string typed elements with php.
  */
-class StringArrayObject extends ArrayObject
+class AbstractArray extends ArrayObject
 {
-    public const EXC_MESSAGE = 'Elements passed must be of the type <string>.';
+    protected string $exceptionMessage;
+    protected string $func;
 
     /**
      * Class Contructor.
      *
-     * @param array  $input
-     * @param int    $flags
-     * @param string $iterator_class
+     * @param string        $func               function to check the array values
+     * @param array<mixed>  $input              array of values
+     * @param int           $flags              see array object on php site
+     * @param string        $iterator_class     see array object on php site
      *
      * @throws InvalidArgumentException If elements in the optional array parameter
      *                                  aren't of the configured type.
      */
-    public function __construct(array $input = [], int $flags = 0, string $iterator_class = "ArrayIterator")
+    public function __construct(string $func, array $input = [], int $flags = 0, string $iterator_class = "ArrayIterator")
     {
-        //get input array len
-        $count = \count($input);
         //check for invalid values inside provided array
-        //for is simple than previosu solution
-        for ($i = 0; $i < $count; $i++) {
-            if (\is_string($input[$i])) {
-                continue;
-            }
-            throw new InvalidArgumentException(self::EXC_MESSAGE);
+        //array_map returns an array of trues or false
+        //product of all trues return 1, only one false make result 0
+        if (!\array_product(\array_map($func, $input))) {
+            throw new InvalidArgumentException($this->exceptionMessage);
         }
+
+        $this->func = $func;
 
         //call parent constructor
         parent::__construct($input, $flags, $iterator_class);
@@ -62,13 +62,11 @@ class StringArrayObject extends ArrayObject
      */
     public function offsetSet($index, $newval): void
     {
-        if (\is_string($newval)) {
-            parent::offsetSet($index, $newval);
-
-            return;
+        if (!($this->func)($newval)) {
+            throw new InvalidArgumentException($this->exceptionMessage);
         }
 
-        throw new InvalidArgumentException(self::EXC_MESSAGE);
+        parent::offsetSet($index, $newval);
     }
 
     /**
@@ -81,12 +79,10 @@ class StringArrayObject extends ArrayObject
      */
     public function append($value): void
     {
-        if (\is_string($value)) {
-            parent::append($value);
-
-            return;
+        if (!($this->func)($value)) {
+            throw new InvalidArgumentException($this->exceptionMessage);
         }
 
-        throw new InvalidArgumentException(self::EXC_MESSAGE);
+        parent::append($value);
     }
 }

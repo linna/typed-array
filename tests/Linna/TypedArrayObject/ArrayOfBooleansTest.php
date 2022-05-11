@@ -9,23 +9,22 @@
  */
 declare(strict_types=1);
 
-namespace Linna\Tests;
+namespace Linna\TypedArrayObject;
 
 use InvalidArgumentException;
-use Linna\TypedArrayObject\BoolArrayObject;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Bool Array Object Test.
  */
-class BoolArrayObjectTest extends TestCase
+class ArrayOfBooleansTest extends TestCase
 {
     /**
      * Test new instance.
      */
     public function testNewInstance(): void
     {
-        $this->assertInstanceOf(BoolArrayObject::class, (new BoolArrayObject()));
+        $this->assertInstanceOf(ArrayOfBooleans::class, (new ArrayOfBooleans()));
     }
 
     /**
@@ -33,7 +32,7 @@ class BoolArrayObjectTest extends TestCase
      */
     public function testNewInstanceWithValidArgument(): void
     {
-        $this->assertInstanceOf(BoolArrayObject::class, (new BoolArrayObject([true,true,true,false])));
+        $this->assertInstanceOf(ArrayOfBooleans::class, (new ArrayOfBooleans([true,true,true,false])));
     }
 
     /**
@@ -41,7 +40,7 @@ class BoolArrayObjectTest extends TestCase
      */
     public function testSetValueWithValidArgument(): void
     {
-        $boolArray = new BoolArrayObject();
+        $boolArray = new ArrayOfBooleans();
         $boolArray[] = false;
 
         $this->assertSame(1, $this->count($boolArray));
@@ -53,7 +52,7 @@ class BoolArrayObjectTest extends TestCase
      */
     public function testAppendValueWithValidArgument(): void
     {
-        $boolArray = new BoolArrayObject();
+        $boolArray = new ArrayOfBooleans();
         $boolArray->append(false);
 
         $this->assertSame(1, $this->count($boolArray));
@@ -69,7 +68,6 @@ class BoolArrayObjectTest extends TestCase
     {
         return [
             [[[1], [2]]], //array
-            //[[true, false]], //bool
             [[function () {
             }, function () {
             }]], //callable
@@ -89,7 +87,7 @@ class BoolArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $boolArray = new BoolArrayObject($array);
+        (new ArrayOfBooleans($array));
     }
 
     /**
@@ -101,7 +99,6 @@ class BoolArrayObjectTest extends TestCase
     {
         return [
             [[1]], //array
-            //[true], //bool
             [function () {
             }], //callable
             [1.1], //float
@@ -120,7 +117,7 @@ class BoolArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $boolArray = new BoolArrayObject();
+        $boolArray = new ArrayOfBooleans();
         $boolArray[] = $value;
     }
 
@@ -133,7 +130,6 @@ class BoolArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $boolArray = new BoolArrayObject();
-        $boolArray->append($value);
+        (new ArrayOfBooleans())->append($value);
     }
 }

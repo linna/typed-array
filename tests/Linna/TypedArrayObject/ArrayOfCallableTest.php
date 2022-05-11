@@ -9,23 +9,22 @@
  */
 declare(strict_types=1);
 
-namespace Linna\Tests;
+namespace Linna\TypedArrayObject;
 
 use InvalidArgumentException;
-use Linna\TypedArrayObject\FloatArrayObject;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Int Array Object Test.
+ * Callable Array Object Test.
  */
-class FloatArrayObjectTest extends TestCase
+class ArrayOfCallableTest extends TestCase
 {
     /**
      * Test new instance.
      */
     public function testNewInstance(): void
     {
-        $this->assertInstanceOf(FloatArrayObject::class, (new FloatArrayObject()));
+        $this->assertInstanceOf(ArrayOfCallable::class, (new ArrayOfCallable()));
     }
 
     /**
@@ -33,7 +32,9 @@ class FloatArrayObjectTest extends TestCase
      */
     public function testNewInstanceWithValidArgument(): void
     {
-        $this->assertInstanceOf(FloatArrayObject::class, (new FloatArrayObject([1.1,2.2,3.3,4.4,5.5])));
+        $this->assertInstanceOf(ArrayOfCallable::class, (new ArrayOfCallable([function ($e) {
+            return $e+1;
+        }])));
     }
 
     /**
@@ -41,11 +42,13 @@ class FloatArrayObjectTest extends TestCase
      */
     public function testSetValueWithValidArgument(): void
     {
-        $floatArray = new FloatArrayObject();
-        $floatArray[] = 1.1;
+        $callableArray = new ArrayOfCallable();
+        $callableArray[] = function ($e) {
+            return $e+1;
+        };
 
-        $this->assertSame(1, $this->count($floatArray));
-        $this->assertSame(1.1, $floatArray[0]);
+        $this->assertSame(1, $this->count($callableArray));
+        $this->assertSame(true, \is_callable($callableArray[0]));
     }
 
     /**
@@ -53,11 +56,13 @@ class FloatArrayObjectTest extends TestCase
      */
     public function testAppendValueWithValidArgument(): void
     {
-        $floatArray = new FloatArrayObject();
-        $floatArray->append(1.1);
+        $callableArray = new ArrayOfCallable();
+        $callableArray->append(function ($e) {
+            return $e+1;
+        });
 
-        $this->assertSame(1, $this->count($floatArray));
-        $this->assertSame(1.1, $floatArray[0]);
+        $this->assertSame(1, $this->count($callableArray));
+        $this->assertSame(true, \is_callable($callableArray[0]));
     }
 
     /**
@@ -70,10 +75,7 @@ class FloatArrayObjectTest extends TestCase
         return [
             [[[1], [2]]], //array
             [[true, false]], //bool
-            [[function () {
-            }, function () {
-            }]], //callable
-            //[[1.1, 2.2]], //float
+            [[1.1, 2.2]], //float
             [[1, 2]], //int
             [[(object) ['name' => 'foo'], (object) ['name' => 'bar']]], //object
             [['a', 'b']], //string
@@ -89,7 +91,7 @@ class FloatArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $floatArray = new FloatArrayObject($array);
+        (new ArrayOfCallable($array));
     }
 
     /**
@@ -102,9 +104,7 @@ class FloatArrayObjectTest extends TestCase
         return [
             [[1]], //array
             [true], //bool
-            [function () {
-            }], //callable
-            //[1.1], //float
+            [1.1], //float
             [1], //int
             [(object) ['name' => 'foo']], //object
             ['a'], //string
@@ -120,8 +120,8 @@ class FloatArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $floatArray = new FloatArrayObject();
-        $floatArray[] = $value;
+        $callableArray = new ArrayOfCallable();
+        $callableArray[] = $value;
     }
 
     /**
@@ -133,7 +133,6 @@ class FloatArrayObjectTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $floatArray = new FloatArrayObject();
-        $floatArray->append($value);
+        (new ArrayOfCallable())->append($value);
     }
 }

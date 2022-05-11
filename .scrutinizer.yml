@@ -14,7 +14,7 @@ tools:
 
 build:
     environment:
-       php: 8.0
+       php: 8.1
     tests:
             override:
                 -
