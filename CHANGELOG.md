@@ -10,20 +10,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - php 8.0 support
-- `ArrayOfArrays` class
-- `ArrayOfBooleans` class
-- `ArrayOfCallable` class
-- `ArrayOfClasses` class
-- `ArrayOfFloats` class
-- `ArrayOfIntegers` class
-- `ArrayOfObjects` class
-- `ArrayOfStrings` class
+- `Linna\TypedArrayObject\ArrayOfArrays` class
+- `Linna\TypedArrayObject\ArrayOfBooleans` class
+- `Linna\TypedArrayObject\ArrayOfCallable` class
+- `Linna\TypedArrayObject\ArrayOfClasses` class
+- `Linna\TypedArrayObject\ArrayOfFloats` class
+- `Linna\TypedArrayObject\ArrayOfIntegers` class
+- `Linna\TypedArrayObject\ArrayOfObjects` class
+- `Linna\TypedArrayObject\ArrayOfStrings` class
 
 ### Changed
 - namespace from `Linna` to `Linna\TypedArrayObject`
 - type chek is performed als on method `ArrayObject->append()`
 
-### removed
+### Removed
 - `Linna\TypedArray` class
 
 ## [v2.0.1](https://github.com/linna/typed-array/compare/v2.0.0...v2.0.1) - 2020-03-23
