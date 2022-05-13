@@ -22,7 +22,7 @@
 This package provide typed arrays for php as extension of native [ArrayObject](http://php.net/manual/en/class.arrayobject.php).  
 
 ## Requirements
-This package require php 8.0
+This package require php 8.1
 
 ## Installation
 With composer:
