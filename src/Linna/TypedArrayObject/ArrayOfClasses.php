@@ -11,18 +11,22 @@ declare(strict_types=1);
 
 namespace Linna\TypedArrayObject;
 
-use ArrayObject;
 use InvalidArgumentException;
 
 /**
  * Provide a way for create an array of typed elements with php.
  */
-class ArrayOfClasses extends ArrayObject
+class ArrayOfClasses extends AbstractArray
 {
     /**
      * @var string Current type for array
      */
     protected string $class;
+
+    /**
+     * It overrides parent message
+     * @var string Exception message
+     */
     protected string $exceptionMessage;
 
 
@@ -40,56 +44,24 @@ class ArrayOfClasses extends ArrayObject
     {
         $this->class = $class;
         $this->exceptionMessage = "Elements passed must be of the type <{$class}>.";
-
-        if (!\class_exists($class)) {
-            throw new InvalidArgumentException("Type <{$this->class}> provided isn't a class.");
-        }
-
-        if (!\array_product(\array_map(function ($x) use ($class) {
-            return $x instanceof $class;
-        }, $input))) {
-            throw new InvalidArgumentException($this->exceptionMessage);
-        }
-
-        parent::__construct($input, $flags, $iterator_class);
+        // first argument is the php8.1 method to pass function reference as closure.
+        // check https://www.php.net/manual/en/functions.first_class_callable_syntax.php
+        parent::__construct($this->is_class(...), $input, $flags, $iterator_class);
     }
 
     /**
-     * Array style value assignment.
+     * Check if argument is instance of specific class.
      *
-     * @ignore
+     * @param mixed $value
      *
-     * @param mixed $index
-     * @param object $newval
-     *
-     * @throws InvalidArgumentException If value passed with $newval are not of the expected type
-     *
-     * @return void
+     * @return bool
      */
-    public function offsetSet($index, $newval): void
+    protected function is_class(mixed $value): bool
     {
-        if (!($newval instanceof $this->class)) {
-            throw new InvalidArgumentException($this->exceptionMessage);
+        if ($value instanceof $this->class) {
+            return true;
         }
 
-        parent::offsetSet($index, $newval);
-    }
-
-    /**
-     * Append a value at the end of the array.
-     *
-     * @param object $value
-     *
-     * @return void
-     *
-     * @throws InvalidArgumentException  If value passed with $value are not of the expected type
-     */
-    public function append($value): void
-    {
-        if (!($value instanceof $this->class)) {
-            throw new InvalidArgumentException($this->exceptionMessage);
-        }
-
-        parent::append($value);
+        return false;
     }
 }

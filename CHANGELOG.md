@@ -6,10 +6,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [v3.0.0](https://github.com/linna/typed-array/compare/v2.0.1...v3.0.0) - 2022-05-11
+## [v3.0.0](https://github.com/linna/typed-array/compare/v2.0.1...v3.0.0) - 2022-05-13
 
 ### Added
-- php 8.0 support
+- php 8.1 support
 - `Linna\TypedArrayObject\ArrayOfArrays` class
 - `Linna\TypedArrayObject\ArrayOfBooleans` class
 - `Linna\TypedArrayObject\ArrayOfCallable` class

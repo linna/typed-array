@@ -36,6 +36,8 @@ class ArrayOfBooleans extends AbstractArray
      */
     public function __construct(array $input = [], int $flags = 0, string $iterator_class = "ArrayIterator")
     {
-        parent::__construct('is_bool', $input, $flags, $iterator_class);
+        // first argument is the php8.1 method to pass function reference as closure.
+        // check https://www.php.net/manual/en/functions.first_class_callable_syntax.php
+        parent::__construct(is_bool(...), $input, $flags, $iterator_class);
     }
 }

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Linna\TypedArrayObject;
 
 use ArrayObject;
+use Closure;
 use InvalidArgumentException;
 
 /**
@@ -20,12 +21,12 @@ use InvalidArgumentException;
 class AbstractArray extends ArrayObject
 {
     protected string $exceptionMessage;
-    protected string $func;
+    protected Closure $func;
 
     /**
      * Class Contructor.
      *
-     * @param string        $func               function to check the array values
+     * @param Closure       $func               function to check the array values
      * @param array<mixed>  $input              array of values
      * @param int           $flags              see array object on php site
      * @param string        $iterator_class     see array object on php site
@@ -33,7 +34,7 @@ class AbstractArray extends ArrayObject
      * @throws InvalidArgumentException If elements in the optional array parameter
      *                                  aren't of the configured type.
      */
-    public function __construct(string $func, array $input = [], int $flags = 0, string $iterator_class = "ArrayIterator")
+    public function __construct(Closure $func, array $input = [], int $flags = 0, string $iterator_class = "ArrayIterator")
     {
         //check for invalid values inside provided array
         //array_map returns an array of trues or false
