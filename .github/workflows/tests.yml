@@ -8,12 +8,13 @@ on:
 
 jobs:
   tests:
+    name: Unit tests
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: true
       matrix:
-        php: [8.1]
+        php: [8.1, 8.2]
 
     name: PHP ${{ matrix.php }}
 
@@ -33,3 +34,59 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
+
+  static-analysis:
+    name: Code analysis with PHPStan
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.1, 8.2]
+
+    name: PHP ${{ matrix.php }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Execute PHPStan analysis
+        run: vendor/bin/phpstan --xdebug analyze src --level 8 
+  
+  mutation-tests:
+    name: Mutation tests with Infection
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.1, 8.2]
+
+    name: PHP ${{ matrix.php }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Execute mutation tests
+        run: ./vendor/bin/infection --min-msi=40
