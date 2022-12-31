@@ -8,7 +8,6 @@ on:
 
 jobs:
   tests:
-    name: Unit tests
     runs-on: ubuntu-latest
 
     strategy:
@@ -16,7 +15,7 @@ jobs:
       matrix:
         php: [8.1, 8.2]
 
-    name: PHP ${{ matrix.php }}
+    name: Unit tests PHP ${{ matrix.php }}
 
     steps:
       - name: Checkout
@@ -36,7 +35,6 @@ jobs:
         run: vendor/bin/phpunit --verbose
 
   static-analysis:
-    name: Code analysis with PHPStan
     runs-on: ubuntu-latest
 
     strategy:
@@ -44,7 +42,7 @@ jobs:
       matrix:
         php: [8.1, 8.2]
 
-    name: PHP ${{ matrix.php }}
+    name: Code analysis with PHPStan PHP ${{ matrix.php }}
 
     steps:
       - name: Checkout
@@ -64,7 +62,6 @@ jobs:
         run: vendor/bin/phpstan --xdebug analyze src --level 8 
   
   mutation-tests:
-    name: Mutation tests with Infection
     runs-on: ubuntu-latest
 
     strategy:
@@ -72,7 +69,7 @@ jobs:
       matrix:
         php: [8.1, 8.2]
 
-    name: PHP ${{ matrix.php }}
+    name: Mutation tests with Infection PHP ${{ matrix.php }}
 
     steps:
       - name: Checkout
