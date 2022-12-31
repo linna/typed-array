@@ -12,11 +12,16 @@ declare(strict_types=1);
 namespace Linna\TypedArrayObject;
 
 use ArrayObject;
+use ArrayIterator;
 use Closure;
 use InvalidArgumentException;
 
 /**
- * Provide a way to create an array of string typed elements with php.
+ * Provide a way to create an array of typed elements with php.
+ * 
+ * @extends ArrayObject<int|string, mixed>
+ * 
+ * @link https://www.php.net/manual/en/class.arrayobject.php
  */
 class AbstractArray extends ArrayObject
 {
@@ -26,15 +31,14 @@ class AbstractArray extends ArrayObject
     /**
      * Class Contructor.
      *
-     * @param Closure       $func               function to check the array values
-     * @param array<mixed>  $input              array of values
-     * @param int           $flags              see array object on php site
-     * @param string        $iterator_class     see array object on php site
+     * @param Closure       $func           Function to check the array values.
+     * @param array<mixed>  $input          Array of values.
+     * @param int           $flags          Flags to control the behaviour of the ArrayObject object. See array object on php site.
+     * @param class-string  $iterator_class Specify the class that will be used for iteration of the ArrayObject object. The class must implement ArrayIterator.
      *
-     * @throws InvalidArgumentException If elements in the optional array parameter
-     *                                  aren't of the configured type.
+     * @throws InvalidArgumentException If elements in the optional array parameter aren't of the configured type.
      */
-    public function __construct(Closure $func, array $input = [], int $flags = 0, string $iterator_class = "ArrayIterator")
+    public function __construct(Closure $func, array $input = [], int $flags = 0, string $iterator_class = ArrayIterator::class)
     {
         //check for invalid values inside provided array
         //array_map returns an array of trues or false
@@ -73,7 +77,7 @@ class AbstractArray extends ArrayObject
     /**
      * Append a value at the end of the array.
      *
-     * @param string $value
+     * @param mixed $value
      * @return void
      *
      * @throws InvalidArgumentException  If value passed with $value are not of the string type

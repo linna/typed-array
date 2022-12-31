@@ -11,21 +11,25 @@ declare(strict_types=1);
 
 namespace Linna\TypedArrayObject;
 
+use ArrayIterator;
 use InvalidArgumentException;
 
 /**
  * Provide a way for create an array of typed elements with php.
+ * 
+ * @link https://www.php.net/manual/en/functions.first_class_callable_syntax.php
  */
 class ArrayOfClasses extends AbstractArray
 {
     /**
-     * @var string Current type for array
+     * @var string Current type for array.
      */
     protected string $class;
 
     /**
-     * It overrides parent message
-     * @var string Exception message
+     * It overrides parent message.
+     *
+     * @var string Exception message.
      */
     protected string $exceptionMessage;
 
@@ -33,14 +37,15 @@ class ArrayOfClasses extends AbstractArray
     /**
      * Class Contructor.
      *
-     * @param array<object> $input
-     * @param int           $flags
-     * @param string        $iterator_class
+     * @param array<object> $input          Array of values, every value must be a <code>object</code>.
+     * @param int           $flags          Flags to control the behaviour of the <code>ArrayObject</code> object, 
+     *                                      see <code>ArrayObject</code> on php site.
+     * @param class-string  $iterator_class Specify the class that will be used for iteration of the <code>ArrayObject</code> 
+     *                                      object, the class must implement <code>ArrayIterator</code>.
      *
-     * @throws InvalidArgumentException If elements in the optional array parameter
-     *                                  aren't of the configured type.
+     * @throws InvalidArgumentException If elements in the optional array parameter aren't of the configured type.
      */
-    public function __construct(string $class, array $input = [], int $flags = 0, string $iterator_class = "ArrayIterator")
+    public function __construct(string $class, array $input = [], int $flags = 0, string $iterator_class = ArrayIterator::class)
     {
         $this->class = $class;
         $this->exceptionMessage = "Elements passed must be of the type <{$class}>.";
@@ -50,11 +55,11 @@ class ArrayOfClasses extends AbstractArray
     }
 
     /**
-     * Check if argument is instance of specific class.
+     * Check if the passed value is instance of specific class.
      *
-     * @param mixed $value
+     * @param mixed $value The value will be checked.
      *
-     * @return bool
+     * @return bool True if the value passed is a valid class, false otherwise.
      */
     protected function is_class(mixed $value): bool
     {
