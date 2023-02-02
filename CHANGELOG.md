@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [v3.0.1](https://github.com/linna/typed-array/compare/v3.0.0...v3.0.1) - 2023-01-XX
 
+### Added
+- `Linna\TypedArrayObject\AbstractArray::NO_FLAGS` constant with value `0`
+
 ### Changed
 - code comments updated
 - composer dev dependencies updated
@@ -28,7 +31,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - namespace from `Linna` to `Linna\TypedArrayObject`
-- type chek is performed als on method `ArrayObject->append()`
+- type check is performed also on method `ArrayObject->append()`
 
 ### Removed
 - `Linna\TypedArray` class

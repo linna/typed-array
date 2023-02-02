@@ -17,7 +17,7 @@ use InvalidArgumentException;
 
 /**
  * Provide a way for create an array of typed elements with php.
- * 
+ *
  * @link https://www.php.net/manual/en/functions.first_class_callable_syntax.php
  */
 class ArrayOfClasses extends AbstractArray
@@ -39,14 +39,14 @@ class ArrayOfClasses extends AbstractArray
      * Class Contructor.
      *
      * @param array<object> $input          Array of values, every value must be a <code>object</code>.
-     * @param int           $flags          Flags to control the behaviour of the <code>ArrayObject</code> object, 
+     * @param int           $flags          Flags to control the behaviour of the <code>ArrayObject</code> object,
      *                                      see <code>ArrayObject</code> on php site.
-     * @param class-string  $iterator_class Specify the class that will be used for iteration of the <code>ArrayObject</code> 
+     * @param class-string  $iterator_class Specify the class that will be used for iteration of the <code>ArrayObject</code>
      *                                      object, the class must implement <code>ArrayIterator</code>.
      *
      * @throws InvalidArgumentException If elements in the optional array parameter aren't of the configured type.
      */
-    public function __construct(string $class, array $input = [], int $flags = 0, string $iterator_class = ArrayIterator::class)
+    public function __construct(string $class, array $input = [], int $flags = AbstractArray::NO_FLAGS, string $iterator_class = ArrayIterator::class)
     {
         $this->class = $class;
         $this->exceptionMessage = "Elements passed must be of the type <{$class}>.";

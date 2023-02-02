@@ -19,14 +19,26 @@ use InvalidArgumentException;
 
 /**
  * Provide a way to create an array of typed elements with php.
- * 
+ *
  * @extends ArrayObject<int|string, mixed>
- * 
+ *
  * @link https://www.php.net/manual/en/class.arrayobject.php
  */
 class AbstractArray extends ArrayObject
 {
+    /**
+     * @var int NO_FLAGS Used as default value for the parameter <code>$flags</code>.
+     */
+    public const NO_FLAGS = 0;
+
+    /**
+     * @var string Exception message, must be overridden by the class who implements this abstract class.
+     */
     protected string $exceptionMessage;
+
+    /**
+     * @var Closure The funcition used to evaluate the element added to the array.
+     */
     protected Closure $func;
 
     /**
@@ -34,12 +46,14 @@ class AbstractArray extends ArrayObject
      *
      * @param Closure       $func           Function to check the array values.
      * @param array<mixed>  $input          Array of values.
-     * @param int           $flags          Flags to control the behaviour of the ArrayObject object. See array object on php site.
-     * @param class-string  $iterator_class Specify the class that will be used for iteration of the ArrayObject object. The class must implement ArrayIterator.
+     * @param int           $flags          Flags to control the behaviour of the ArrayObject object. See array object
+     *                                      on php site.
+     * @param class-string  $iterator_class Specify the class that will be used for iteration of the ArrayObject
+     *                                      object. The class must implement ArrayIterator.
      *
      * @throws InvalidArgumentException If elements in the optional array parameter aren't of the configured type.
      */
-    public function __construct(Closure $func, array $input = [], int $flags = 0, string $iterator_class = ArrayIterator::class)
+    public function __construct(Closure $func, array $input = [], int $flags = AbstractArray::NO_FLAGS, string $iterator_class = ArrayIterator::class)
     {
         //check for invalid values inside provided array
         //array_map returns an array of trues or false
@@ -81,7 +95,7 @@ class AbstractArray extends ArrayObject
      * @param mixed $value
      *
      * @throws InvalidArgumentException  If value passed with $value are not of the string type
-     * 
+     *
      * @return void
      */
     public function append(mixed $value): void

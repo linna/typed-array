@@ -37,6 +37,25 @@ class ArrayOfIntegersTest extends TestCase
     }
 
     /**
+     * Test new instance with valid argument and check values.
+     */
+    public function testNewInstanceWithValidArgumentAndCheck(): void
+    {
+        $intArray = new ArrayOfIntegers([10,20,30,40,50,60,70,80,90,100]);
+
+        $this->assertSame(10, $intArray[0]);
+        $this->assertSame(20, $intArray[1]);
+        $this->assertSame(30, $intArray[2]);
+        $this->assertSame(40, $intArray[3]);
+        $this->assertSame(50, $intArray[4]);
+        $this->assertSame(60, $intArray[5]);
+        $this->assertSame(70, $intArray[6]);
+        $this->assertSame(80, $intArray[7]);
+        $this->assertSame(90, $intArray[8]);
+        $this->assertSame(100, $intArray[9]);
+    }
+
+    /**
      * Test set value with valid argument.
      */
     public function testSetValueWithValidArgument(): void
