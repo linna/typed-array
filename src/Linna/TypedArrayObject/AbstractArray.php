@@ -60,13 +60,13 @@ class AbstractArray extends ArrayObject
      * @ignore
      *
      * @param mixed $index
-     * @param string $newval
+     * @param mixed $newval
      *
      * @throws InvalidArgumentException If value passed with $newval are not of the string type
      *
      * @return void
      */
-    public function offsetSet($index, $newval): void
+    public function offsetSet(mixed $index, mixed $newval): void
     {
         if (!($this->func)($newval)) {
             throw new InvalidArgumentException($this->exceptionMessage);
@@ -79,11 +79,12 @@ class AbstractArray extends ArrayObject
      * Append a value at the end of the array.
      *
      * @param mixed $value
-     * @return void
      *
      * @throws InvalidArgumentException  If value passed with $value are not of the string type
+     * 
+     * @return void
      */
-    public function append($value): void
+    public function append(mixed $value): void
     {
         if (!($this->func)($value)) {
             throw new InvalidArgumentException($this->exceptionMessage);
