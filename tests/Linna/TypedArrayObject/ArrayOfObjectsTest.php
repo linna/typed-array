@@ -69,7 +69,7 @@ class ArrayOfObjectsTest extends TestCase
      *
      * @return array
      */
-    public function invalidArrayProvider(): array
+    public static function invalidArrayProvider(): array
     {
         return [
             [[[1], [2]]], //array
@@ -97,7 +97,7 @@ class ArrayOfObjectsTest extends TestCase
      *
      * @return array
      */
-    public function invalidValueProvider(): array
+    public static function invalidValueProvider(): array
     {
         return [
             [[1]], //array

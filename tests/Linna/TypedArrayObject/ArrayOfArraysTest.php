@@ -65,7 +65,7 @@ class ArrayOfArraysTest extends TestCase
      *
      * @return array
      */
-    public function invalidArrayProvider(): array
+    public static function invalidArrayProvider(): array
     {
         return [
             [[true, false]], //bool
@@ -96,7 +96,7 @@ class ArrayOfArraysTest extends TestCase
      *
      * @return array
      */
-    public function invalidValueProvider(): array
+    public static function invalidValueProvider(): array
     {
         return [
             [true], //bool

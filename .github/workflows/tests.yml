@@ -62,7 +62,7 @@ jobs:
         run: composer install
 
       - name: Execute tests
-        run: vendor/bin/phpunit --verbose
+        run: vendor/bin/phpunit
 
   mutation-tests:
     runs-on: ubuntu-latest
