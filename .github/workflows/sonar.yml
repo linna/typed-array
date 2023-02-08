@@ -35,7 +35,7 @@ jobs:
         run: vendor/bin/phpunit --coverage-clover=coverage-report.clover --log-junit=test-report.xml
 
       - name: Fix code coverage paths
-        run: sed -i 's/\/home\/runner\/work\/csrf-guard\/csrf-guard\//\/github\/workspace\//g' coverage-report.clover
+        run: sed -i 's/\/home\/runner\/work\/typed-array\/typed-array\//\/github\/workspace\//g' coverage-report.clover
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
