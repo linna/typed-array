@@ -1,8 +1,0 @@
-preset: psr2
-
-finder:
-  name:
-    - "*.php"
-  path:
-    - "src"
-    - "tests"
